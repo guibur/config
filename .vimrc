@@ -129,7 +129,9 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 set clipboard=unnamed
 
 
-
+" for Jérémy
+vnoremap y y']
+vnoremap Y y
 
 
 "python with virtualenv support
