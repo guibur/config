@@ -44,6 +44,7 @@ Plugin 'Yggdroot/indentLine'
 call vundle#end()            " required
 filetype plugin indent on    " requiredenable syntax highlighting
 
+source ~/.vimrc.bepo
 
 "Standard configuration
 
@@ -85,6 +86,8 @@ set backspace=indent,eol,start
 " shortcut for inserting only one character
 nnoremap èa a_<Esc>r
 nnoremap èi i_<Esc>r
+nnoremap èA A_<Esc>r
+nnoremap èI I_<Esc>r
 
 set expandtab
 set tabstop=4
@@ -97,7 +100,8 @@ map <F2> :retab <CR> :wq! <CR>
 "nnoremap <C-R> W<C-R>
 "nnoremap <C-C> W<C-C>
 
-
+au BufNewFile,BufRead *.h, *.c
+    \ set expandtab! |
 
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
@@ -106,7 +110,22 @@ au BufNewFile,BufRead *.py
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
-    \ set nowrap |
+    " \ set nowrap |
+
+set linebreak
+let breakindentopt = 'sbr'
+let &showbreak = ' ↳ '
+set breakindent
+noremap t gj
+noremap <Down> gj
+noremap s gk
+noremap <Up> gk
+noremap 0 g0
+noremap $ g$
+noremap àt j
+noremap às k
+noremap à0 0
+noremap à$ $
 
 
 " syntastic
@@ -248,7 +267,6 @@ set pastetoggle=<F12>
 "hi IndentGuidesEven ctermbg=grey
 
 
-source ~/.vimrc.bepo
 
 " shortcut for changing tab
 nnoremap [1;5C gt
@@ -276,9 +294,11 @@ nnoremap àv gv
 nnoremap zt zt
 
 " delete without copy
-nnoremap êd "_d
-vnoremap êd "_d
+nnoremap èd "_d
+vnoremap èd "_d
+nnoremap èD "_D
+vnoremap èD "_D
 
 " caps lock as esc
 au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-au VimLeave * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+" au VimLeave * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'

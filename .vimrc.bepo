@@ -56,7 +56,7 @@ noremap àà gg
 noremap , :
 noremap : ,
 
-noremap U <C-r>
+noremap <C-U> <C-r>
     
     " Désambiguation de {g}
     " —————————————————————
