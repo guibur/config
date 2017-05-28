@@ -271,6 +271,8 @@ set pastetoggle=<F12>
 " shortcut for changing tab
 nnoremap [1;5C gt
 nnoremap [1;5D gT
+nnoremap <C-Right> gt
+nnoremap <C-Left> gT
 " nnoremap > gt
 " nnoremap < gT
 
@@ -302,3 +304,74 @@ vnoremap èD "_D
 " caps lock as esc
 au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 " au VimLeave * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
+" w:mode = 0 for normal, 1 for insert, 2 for replace, 3 for visual
+" function AdaptCursor()
+"     if w:mode==0
+"         silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block
+"     elseif w:mode==1
+"         silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam
+"     elseif w:mode==2
+"         silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape underline
+"     else
+"         silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block
+"     endif
+" endfunction
+" au VimEnter  * let w:mode=0 | call AdaptCursor()
+" au InsertEnter * let w:mode=1 | call AdaptCursor()
+" au InsertLeave * let w:mode=0 | call AdaptCursor()
+" au WinEnter,FocusGained,TabEnter * call AdaptCursor()
+" au WinLeave,FocusLost,TabLeave * silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block
+
+" Colorize line numbers in insert and visual modes
+" ------------------------------------------------
+function! SetCursorLineNrColorInsert(mode)
+    " Insert mode: white
+    if a:mode == "i"
+        highlight CursorLineNr ctermfg=9 
+        highlight LineNr ctermfg=9
+    " Replace mode: red
+    elseif a:mode == "r"
+        highlight CursorLineNr ctermfg=1
+        highlight LineNr ctermfg=1
+    endif
+endfunction
+
+function! SetCursorLineNrColorVisual()
+    set updatetime=0
+    " Visual mode: green
+    highlight CursorLineNr cterm=none ctermfg=2
+    highlight LineNr cterm=none ctermfg=2
+endfunction
+
+function! ResetCursorLineNrColor()
+    set updatetime=4000
+    highlight CursorLineNr cterm=none ctermfg=3
+    highlight LineNr cterm=none ctermfg=3
+endfunction
+
+" vnoremap <silent> <expr> <SID>SetCursorLineNrColorVisual SetCursorLineNrColorVisual()
+" nnoremap <silent> <script> v v<SID>SetCursorLineNrColorVisual
+" nnoremap <silent> <script> V V<SID>SetCursorLineNrColorVisual
+" nnoremap <silent> <script> <C-v> <C-v><SID>SetCursorLineNrColorVisual
+" nnoremap <silent> <script> g r<SID>SetCursorLineNrColorInsert("r")
+" 
+" augroup CursorLineNrColorSwap
+"     autocmd!
+"     autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
+"     autocmd InsertLeave * call ResetCursorLineNrColor()
+"     autocmd CursorHold * call ResetCursorLineNrColor()
+" augroup END
+let &stl.='%{RedrawStatuslineColors(mode())}'
+
+function! RedrawStatuslineColors(mode)
+    if a:mode == 'n'
+        call 
+    elseif a:mode == 'i'
+        call SetCursorLineNrColorInsert("r")
+    elseif a:mode == 'R'
+        call SetCursorLineNrColorInsert("i")
+    elseif a:mode == 'v' || a:mode == 'V' || a:mode == '^V'
+        call VisualHighlight()
+    endif
+endfunction
