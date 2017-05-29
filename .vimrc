@@ -58,6 +58,7 @@ set encoding=utf-8
 " show line numbers
 set relativenumber
 set number
+set ruler
 
 " set tabs to have 4 spaces
 set ts=4
@@ -122,8 +123,10 @@ noremap s gk
 noremap <Up> gk
 noremap 0 g0
 noremap $ g$
-noremap àt j
-noremap às k
+noremap àt J
+noremap às K
+noremap T j
+noremap S k
 noremap à0 0
 noremap à$ $
 
@@ -300,6 +303,19 @@ nnoremap èd "_d
 vnoremap èd "_d
 nnoremap èD "_D
 vnoremap èD "_D
+nnoremap x "_x
+nnoremap èx x
+
+nnoremap Y y$
+
+" comment and uncomment
+noremap è# :s/^/# /g<CR>
+noremap èc :s/^/\/\/ /g<CR>
+noremap èu :s/^# g<CR>:s/^\/\/ //g<CR>
+
+" indent
+nnoremap < <<
+nnoremap > >>
 
 " caps lock as esc
 au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
@@ -344,6 +360,13 @@ function! SetCursorLineNrColorVisual()
     highlight LineNr cterm=none ctermfg=2
 endfunction
 
+function! SetCursorLineNrColorReplace()
+    " Replace mode: red
+    highlight CursorLineNr cterm=none ctermfg=1
+    highlight LineNr cterm=none ctermfg=1
+    set updatetime=0
+endfunction
+
 function! ResetCursorLineNrColor()
     set updatetime=4000
     highlight CursorLineNr cterm=none ctermfg=3
@@ -351,27 +374,14 @@ function! ResetCursorLineNrColor()
 endfunction
 
 " vnoremap <silent> <expr> <SID>SetCursorLineNrColorVisual SetCursorLineNrColorVisual()
-" nnoremap <silent> <script> v v<SID>SetCursorLineNrColorVisual
-" nnoremap <silent> <script> V V<SID>SetCursorLineNrColorVisual
-" nnoremap <silent> <script> <C-v> <C-v><SID>SetCursorLineNrColorVisual
-" nnoremap <silent> <script> g r<SID>SetCursorLineNrColorInsert("r")
-" 
-" augroup CursorLineNrColorSwap
-"     autocmd!
-"     autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
-"     autocmd InsertLeave * call ResetCursorLineNrColor()
-"     autocmd CursorHold * call ResetCursorLineNrColor()
-" augroup END
-let &stl.='%{RedrawStatuslineColors(mode())}'
+nnoremap <silent> v :call SetCursorLineNrColorVisual()<CR>v
+nnoremap <silent> V :call SetCursorLineNrColorVisual()<CR>V
+nnoremap <silent> <C-v> :call SetCursorLineNrColorVisual()<CR><C-v>
+nnoremap <silent> g :call SetCursorLineNrColorReplace()<CR>r
 
-function! RedrawStatuslineColors(mode)
-    if a:mode == 'n'
-        call 
-    elseif a:mode == 'i'
-        call SetCursorLineNrColorInsert("r")
-    elseif a:mode == 'R'
-        call SetCursorLineNrColorInsert("i")
-    elseif a:mode == 'v' || a:mode == 'V' || a:mode == '^V'
-        call VisualHighlight()
-    endif
-endfunction
+augroup CursorLineNrColorSwap
+    autocmd!
+    autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
+    autocmd InsertLeave * call ResetCursorLineNrColor()
+    autocmd CursorHold * call ResetCursorLineNrColor()
+augroup END
