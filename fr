@@ -638,7 +638,7 @@ xkb_symbols "bepo_Num" {
     key <AD09> { [               l,            L,    dead_stroke                 ] }; // l L /
     key <AD10> { [               j,            J,          U0133,          U0132 ] }; // j J ĳ Ĳ
     key <AD11> { [               z,            Z,          schwa,          SCHWA ] }; // z Z ə Ə
-    key <AD12> { [               k,            K,     dead_breve                 ] }; // w W ̆
+    key <AD12> { [     ecircumflex,  Ecircumflex,     dead_breve                 ] }; // w W ̆
 
     // Third row
     key <AC01> { [               a,            A,             ae,             AE ] }; // a A æ Æ
@@ -655,12 +655,12 @@ xkb_symbols "bepo_Num" {
     key <BKSL> { [        ccedilla,     Ccedilla,   dead_cedilla, dead_belowcomma ] }; // ç Ç ¸ ,
 
     // Fourth row
-    key <LSGT> { [     ecircumflex,  Ecircumflex,          slash                 ] }; // ê Ê /
+    key <LSGT> { [               w,            W,          slash                 ] }; // ê Ê /
     key <AB01> { [          agrave,       Agrave,      backslash                 ] }; // à À \
     key <AB02> { [               y,            Y,      braceleft, leftsinglequotemark  ] }; // y Y { ‘
     key <AB03> { [               x,            X,     braceright, rightsinglequotemark ] }; // x X } ’
     key <AB04> { [          period,        colon,       ellipsis, periodcentered ] }; // . : … ·
-    key <AB05> { [               w,            W,     asciitilde                 ] }; // k K ~
+    key <AB05> { [               k,            K,     asciitilde                 ] }; // k K ~
     key <AB06> { [      apostrophe,     question,   questiondown,      dead_hook ] }; // ' ? ¿ ̉
     key <AB07> { [               q,            Q, dead_abovering,  dead_belowdot ] }; // q Q ˚ ̣
     key <AB08> { [               g,            G,     dead_greek                 ] }; // g G µ

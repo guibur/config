@@ -50,7 +50,7 @@ source ~/.vimrc.bepo
 
 syntax enable
 
-:let mapleader=" "
+let mapleader=" "
 
 " encoding
 set encoding=utf-8
@@ -59,6 +59,9 @@ set encoding=utf-8
 set relativenumber
 set number
 set ruler
+
+" show commands
+set showcmd
 
 " set tabs to have 4 spaces
 set ts=4
@@ -80,15 +83,16 @@ set showmatch
 
 " Ignore case for searches
 set ignorecase
+set smartcase
 
 " reset normal effect of backspace
 set backspace=indent,eol,start
 
 " shortcut for inserting only one character
-nnoremap èa a_<Esc>r
-nnoremap èi i_<Esc>r
-nnoremap èA A_<Esc>r
-nnoremap èI I_<Esc>r
+nnoremap èa a_<Esc>:call SetCursorLineNrColorReplace()<CR>r
+nnoremap èi i_<Esc>:call SetCursorLineNrColorReplace()<CR>r
+nnoremap èA A_<Esc>:call SetCursorLineNrColorReplace()<CR>r
+nnoremap èI I_<Esc>:call SetCursorLineNrColorReplace()<CR>r
 
 set expandtab
 set tabstop=4
@@ -111,6 +115,8 @@ au BufNewFile,BufRead *.py
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
+    \ set comments+=:# |
+    \ set formatoptions+=ro |
     " \ set nowrap |
 
 set linebreak
@@ -129,6 +135,12 @@ noremap T j
 noremap S k
 noremap à0 0
 noremap à$ $
+nnoremap <expr> àP '`[' . strpart(getregtype(), 0, 1) . '`]'
+nnoremap <expr> àp '[v']
+vnoremap ié iw
+vnoremap iÉ iW
+vnoremap aé aw
+vnoremap aÉ aW
 
 
 " syntastic
@@ -155,6 +167,8 @@ set clipboard=unnamed
 vnoremap y y']
 vnoremap Y y
 
+" get the differences since last saved
+com! Diffs w !diff % - 
 
 "python with virtualenv support
 "py3 << EOF
@@ -201,9 +215,15 @@ noremap èé :YcmCompleter GoToReferences<CR>
 
 
 " slime for sending code to ipython
-let g:slime_python_ipython = 1
+let g:slime_python_ipython = 1 "delete -q in ftplugin/python/slime.vim
 let g:slime_target = "tmux"
 let g:slimux_select_from_current_window = 1
+let g:slime_no_mappings = 1
+vmap èy <Plug>SlimeRegionSend
+nmap èy <Plug>SlimeLineSend
+nmap èY <Plug>SlimeConfig|<Plug>SlimeLineSend
+vmap èY <Plug>SlimeConfig|<Plug>SlimeRegionSend
+
 " use with tmux! or byobu
 " select second pane of current window with 0.1
 " useful commands:
@@ -243,6 +263,10 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 map <C-R> zL
 map <C-C> zH
 
+" change redo to U
+noremap U <C-R>
+noremap ù U
+
 " ZSH like menu
 " When you type the first tab, it will complete as much as possible,
 " the second tab hit will provide a list, the third
@@ -257,6 +281,7 @@ set wildmenu
 " map <leader>k :Vertical b<CR>
 noremap <silent> <c-t> :Vertical f<CR>
 noremap <silent> <c-s> :Vertical b<CR>
+" require 'stty -ixon' in the .bashrc
 
 " set paste mode
 set pastetoggle=<F12>
@@ -288,34 +313,61 @@ nmap êàe <Plug>(easymotion-ge)
 nmap êàE <Plug>(easymotion-gE)
 nmap êt <Plug>(easymotion-j)
 nmap ês <Plug>(easymotion-k)
-nmap êr <Plug>(easymotion-s)
+nmap êr <Plug>(easymotion-sn)
 nmap êy <Plug>(easymotion-bd-t)
 nmap êê <Plug>(easymotion-bd-f)
 nmap êx <Plug>(easymotion-bd-n)
-nmap êa <Plug>(easymotion-next)
-nmap êu <Plug>(easymotion-prev)
+nmap ê* <Plug>(easymotion-next)
+nmap ê# <Plug>(easymotion-prev)
+nmap ên <Plug>(easymotion-bd-n)
+nmap ê. <Plug>(easymotion-repeat)
 
 nnoremap àv gv
 nnoremap zt zt
 
 " delete without copy
-nnoremap èd "_d
-vnoremap èd "_d
-nnoremap èD "_D
-vnoremap èD "_D
+nnoremap d "_d
+vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
+nnoremap èd d
+vnoremap èd d
+nnoremap èD D
+vnoremap èD D
+nnoremap l "_l
+vnoremap l "_l
+nnoremap L "_L
+vnoremap L "_L
+nnoremap èl l
+vnoremap èl l
+nnoremap èL L
+vnoremap èL L
 nnoremap x "_x
 nnoremap èx x
 
 nnoremap Y y$
 
 " comment and uncomment
-noremap è# :s/^/# /g<CR>
-noremap èc :s/^/\/\/ /g<CR>
-noremap èu :s/^# g<CR>:s/^\/\/ //g<CR>
+noremap è# :s.^\(\s*\)\(\S\).\1# \2.g<CR>
+":s/^/# /g<CR>
+noremap èc :s.^\(\s*\)\(\S\).\1\/\/ \2.g<CR>
+" :s/^/\/\/ /g<CR>
+noremap èu :s.^\(\s*\)# .\1.g<CR>
+noremap èC :s.^\(\s*\)\/\/ .\1.g<CR>
+" :s/^# g<CR>:s/^\/\/ //g<CR>
 
 " indent
 nnoremap < <<
 nnoremap > >>
+
+" python go to beginning block
+nmap ]b    ^c<C-s>^é
+nmap ]e    ^c<C-t>^
+
+" history
+nnoremap è, :<C-f>
+nnoremap è/ /<C-f>
+noremap <C-q> <C-c><C-c>
 
 " caps lock as esc
 au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
@@ -361,10 +413,17 @@ function! SetCursorLineNrColorVisual()
 endfunction
 
 function! SetCursorLineNrColorReplace()
+    set updatetime=0
     " Replace mode: red
     highlight CursorLineNr cterm=none ctermfg=1
     highlight LineNr cterm=none ctermfg=1
+endfunction
+
+function! SetCursorLineNrColorScript()
     set updatetime=0
+    " script mode: blue
+    highlight CursorLineNr cterm=none ctermfg=4
+    highlight LineNr cterm=none ctermfg=4
 endfunction
 
 function! ResetCursorLineNrColor()
@@ -378,6 +437,8 @@ nnoremap <silent> v :call SetCursorLineNrColorVisual()<CR>v
 nnoremap <silent> V :call SetCursorLineNrColorVisual()<CR>V
 nnoremap <silent> <C-v> :call SetCursorLineNrColorVisual()<CR><C-v>
 nnoremap <silent> g :call SetCursorLineNrColorReplace()<CR>r
+nnoremap , :call SetCursorLineNrColorScript()<CR>:
+nnoremap / :call SetCursorLineNrColorScript()<CR>/
 
 augroup CursorLineNrColorSwap
     autocmd!
