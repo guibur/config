@@ -10,8 +10,8 @@ onoremap aÉ aW
 onoremap ié iw
 onoremap iÉ iW
  " Pour faciliter les manipulations de fenêtres, on utilise {W} comme un Ctrl+W :
-noremap w <C-w>
-noremap W <C-w><C-w>
+" noremap w <C-w>
+" noremap W <C-w><C-w>
   
 " [HJKL] -> {CTSR}
 " ————————————————

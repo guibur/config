@@ -21,7 +21,7 @@ Bundle 'jpalardy/vim-slime'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'terryma/vim-smooth-scroll'
-Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-surround'
 Bundle 'easymotion/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Plugin 'rbong/vim-vertical'
@@ -170,6 +170,10 @@ vnoremap Y y
 " get the differences since last saved
 com! Diffs w !diff % - 
 
+
+"print as PDF file
+com!  PDF hardcopy > toPrint.pdf
+
 "python with virtualenv support
 "py3 << EOF
 "import os
@@ -304,23 +308,27 @@ nnoremap <C-Left> gT
 " nnoremap > gt
 " nnoremap < gT
 
-map ê <Plug>(easymotion-prefix)
-nmap êj <Plug>(easymotion-t)
-nmap êJ <Plug>(easymotion-T)
-nmap êé <Plug>(easymotion-w)
-nmap êÉ <Plug>(easymotion-W)
-nmap êàe <Plug>(easymotion-ge)
-nmap êàE <Plug>(easymotion-gE)
-nmap êt <Plug>(easymotion-j)
-nmap ês <Plug>(easymotion-k)
-nmap êr <Plug>(easymotion-sn)
-nmap êy <Plug>(easymotion-bd-t)
-nmap êê <Plug>(easymotion-bd-f)
-nmap êx <Plug>(easymotion-bd-n)
-nmap ê* <Plug>(easymotion-next)
-nmap ê# <Plug>(easymotion-prev)
-nmap ên <Plug>(easymotion-bd-n)
-nmap ê. <Plug>(easymotion-repeat)
+map w <Plug>(easymotion-prefix)
+nmap wj <Plug>(easymotion-t)
+nmap wJ <Plug>(easymotion-T)
+nmap wé <Plug>(easymotion-w)
+nmap wÉ <Plug>(easymotion-W)
+nmap wàe <Plug>(easymotion-ge)
+nmap wàE <Plug>(easymotion-gE)
+nmap wt <Plug>(easymotion-j)
+nmap ws <Plug>(easymotion-w)
+nmap wr <Plug>(easymotion-sn)
+nmap wy <Plug>(easymotion-bd-t)
+nmap ww <Plug>(easymotion-bd-f)
+nmap wx <Plug>(easymotion-bd-n)
+nmap w* <Plug>(easymotion-next)
+nmap w# <Plug>(easymotion-prev)
+nmap wn <Plug>(easymotion-bd-n)
+nmap w. <Plug>(easymotion-repeat)
+
+noremap <CR> G
+noremap k ge
+noremap K gE
 
 nnoremap àv gv
 nnoremap zt zt
@@ -334,14 +342,10 @@ nnoremap èd d
 vnoremap èd d
 nnoremap èD D
 vnoremap èD D
-nnoremap l "_l
-vnoremap l "_l
-nnoremap L "_L
-vnoremap L "_L
-nnoremap èl l
-vnoremap èl l
-nnoremap èL L
-vnoremap èL L
+noremap l "_c
+noremap L "_C
+noremap èl c
+noremap èL C
 nnoremap x "_x
 nnoremap èx x
 
