@@ -18,7 +18,7 @@ Bundle 'honza/vim-snippets'
 Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'jpalardy/vim-slime'
-Bundle 'altercation/vim-colors-solarized'
+"Bundle 'altercation/vim-colors-solarized'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'terryma/vim-smooth-scroll'
 "Bundle 'tpope/vim-surround'
@@ -58,7 +58,10 @@ set encoding=utf-8
 " show line numbers
 set relativenumber
 set number
+" show in bottom-right-hand corner number of line and column
 set ruler
+" mouse doesn't select line numbers
+set mouse=a
 
 " show commands
 set showcmd
@@ -105,19 +108,6 @@ map <F2> :retab <CR> :wq! <CR>
 "nnoremap <C-R> W<C-R>
 "nnoremap <C-C> W<C-C>
 
-au BufNewFile,BufRead *.h, *.c
-    \ set expandtab! |
-
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix |
-    \ set comments+=:# |
-    \ set formatoptions+=ro |
-    " \ set nowrap |
 
 set linebreak
 let breakindentopt = 'sbr'
@@ -135,12 +125,15 @@ noremap T j
 noremap S k
 noremap à0 0
 noremap à$ $
-nnoremap <expr> àP '`[' . strpart(getregtype(), 0, 1) . '`]'
-nnoremap <expr> àp '[v']
+nnoremap àp '[V']
 vnoremap ié iw
 vnoremap iÉ iW
 vnoremap aé aw
 vnoremap aÉ aW
+noremap ( [
+noremap ) ]
+noremap [ (
+noremap ] ]
 
 
 " syntastic
@@ -153,8 +146,6 @@ let g:syntastic_python_checkers = ['pylint']
 " configuration for nerdtree
 " active tree shortcut
 map <C-n> :NERDTreeToggle<CR>
-" ignore tree if it is the last left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " ignore files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$']
 
@@ -168,11 +159,11 @@ vnoremap y y']
 vnoremap Y y
 
 " get the differences since last saved
-com! Diffs w !diff % - 
+"com! Diffs w !diff % - 
 
 
 "print as PDF file
-com!  PDF hardcopy > toPrint.pdf
+"com!  PDF hardcopy > toPrint.pdf
 
 "python with virtualenv support
 "py3 << EOF
@@ -326,7 +317,6 @@ nmap w# <Plug>(easymotion-prev)
 nmap wn <Plug>(easymotion-bd-n)
 nmap w. <Plug>(easymotion-repeat)
 
-noremap <CR> G
 noremap k ge
 noremap K gE
 
@@ -364,18 +354,14 @@ noremap èC :s.^\(\s*\)\/\/ .\1.g<CR>
 nnoremap < <<
 nnoremap > >>
 
-" python go to beginning block
-nmap ]b    ^c<C-s>^é
-nmap ]e    ^c<C-t>^
+" python go to beginning/end of block
+nmap (b    ^c<C-s>^é
+nmap )b    ^c<C-t>^
 
 " history
 nnoremap è, :<C-f>
 nnoremap è/ /<C-f>
 noremap <C-q> <C-c><C-c>
-
-" caps lock as esc
-au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-" au VimLeave * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 
 " w:mode = 0 for normal, 1 for insert, 2 for replace, 3 for visual
 " function AdaptCursor()
@@ -449,4 +435,25 @@ augroup CursorLineNrColorSwap
     autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
     autocmd InsertLeave * call ResetCursorLineNrColor()
     autocmd CursorHold * call ResetCursorLineNrColor()
+
+    au BufNewFile,BufRead *.h, *.c
+        \ set expandtab! |
+
+    au BufNewFile,BufRead *.py
+        \ set tabstop=4 |
+        \ set softtabstop=4 |
+        \ set shiftwidth=4 |
+        \ set expandtab |
+        \ set autoindent |
+        \ set fileformat=unix |
+        \ set comments+=:# |
+        \ set formatoptions+=ro |
+        " \ set nowrap |
+
+    " ignore tree if it is the last left
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+    " caps lock as esc
+    au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+    " au VimLeave * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 augroup END

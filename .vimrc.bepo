@@ -38,6 +38,7 @@ noremap j t
 noremap J T
    " {L} = « Change »             (l = attend un mvt, L = jusqu'à la fin de ligne)
 noremap l c
+noremap ll cc
 noremap L C
    " {H} = « Remplace »           (h = un caractère slt, H = reste en « Remplace »)
 noremap g r
