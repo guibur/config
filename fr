@@ -613,16 +613,16 @@ xkb_symbols "bepo_Num" {
 
     // First row
     key <TLDE> { [          dollar,   numbersign,        endash,       paragraph ] }; // $ # – ¶
-    key <AE01> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [        quotedbl,   leftdoublequotemark,             emdash, doublelowquotemark ] }; // " 1 — „
+    key <AE01> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [           equal,              notequal,             dagger,       doubledagger ] }; // " 1 — „
     key <AE02> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [           slash,              asterisk,           multiply,           division ] }; // « 2 < “
     key <AE03> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [           minus,                  plus,          plusminus,              U2212 ] }; // » 3 > ”
     key <AE04> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [       parenleft,                 less ,        bracketleft,      lessthanequal ] }; // ( 4 [ ≤
     key <AE05> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [      parenright,               greater,       bracketright,   greaterthanequal ] }; // ) 5 ] ≥
-    key <AE06> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [           equal,  rightdoublequotemark,           notequal                     ] }; // @ 6 ^
-    key <AE07> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [              0 ,                     5,        asciicircum,            notsign ] }; // + 7 ± ¬
+    key <AE06> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [ leftdoublequotemark,            emdash, rightdoublequotemark,  doublelowquotemark ] }; // @ 6 ^
+    key <AE07> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [              0 ,                     5,              notsign ] }; // + 7 ± ¬
     key <AE08> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [              1 ,                     6,      guillemotleft,         onequarter ] }; // - 8 − ¼
     key <AE09> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [              2 ,                     7,     guillemotright,            onehalf ] }; // / 9 ÷ ½
-    key <AE10> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [              3 ,                     8,                 at,      threequarters ] }; // * 0 × ¾
+    key <AE10> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC", [              3 ,                     8,       asciicircum ,      threequarters ] }; // * 0 × ¾
     key <AE11> { [               4,            9,         degree,        minutes ] }; // = ° ≠ ′
     key <AE12> { [         percent,        grave,          U2030,        seconds ] }; // % ` ‰ ″
 
@@ -635,7 +635,7 @@ xkb_symbols "bepo_Num" {
     key <AD06> { [ dead_circumflex,       exclam,     exclamdown                 ] }; // ^ ! ¡
     key <AD07> { [               v,            V,     dead_caron                 ] }; // v V ˇ
     key <AD08> { [               d,            D,            eth,            ETH ] }; // d D ð Ð
-    key <AD09> { [               l,            L,    dead_stroke                 ] }; // l L /
+    key <AD09> { [               l,            L,             at                 ] }; // l L @
     key <AD10> { [               j,            J,          U0133,          U0132 ] }; // j J ĳ Ĳ
     key <AD11> { [               z,            Z,          schwa,          SCHWA ] }; // z Z ə Ə
     key <AD12> { [     ecircumflex,  Ecircumflex,     dead_breve                 ] }; // w W ̆
@@ -655,16 +655,16 @@ xkb_symbols "bepo_Num" {
     key <BKSL> { [        ccedilla,     Ccedilla,   dead_cedilla, dead_belowcomma ] }; // ç Ç ¸ ,
 
     // Fourth row
-    key <LSGT> { [               k,            K,          slash                 ] }; // ê Ê /
+    key <LSGT> { [               k,            K,          slash,    dead_stroke ] }; // ê Ê /
     key <AB01> { [          agrave,       Agrave,      backslash                 ] }; // à À \
     key <AB02> { [               y,            Y,      braceleft, leftsinglequotemark  ] }; // y Y { ‘
     key <AB03> { [               x,            X,     braceright, rightsinglequotemark ] }; // x X } ’
     key <AB04> { [          period,        colon,       ellipsis, periodcentered ] }; // . : … ·
     key <AB05> { [               w,            W,     asciitilde                 ] }; // k K ~
-    key <AB06> { [      apostrophe,     question,   questiondown,      dead_hook ] }; // ' ? ¿ ̉
+    key <AB06> { [      apostrophe,     question,       quotedbl,    questiondown] }; // ' ? ¿ ̉
     key <AB07> { [               q,            Q, dead_abovering,  dead_belowdot ] }; // q Q ˚ ̣
     key <AB08> { [               g,            G,     dead_greek                 ] }; // g G µ
-    key <AB09> { [               h,            H,         dagger,   doubledagger ] }; // h H † ‡
+    key <AB09> { [               h,            H,          equal,      dead_hook ] }; // h H † ‡
     key <AB10> { [               f,            F,    dead_ogonek,    ordfeminine ] }; // f F ̨ ª
 
     key <SPCE> { [           space, nobreakspace,     underscore,          U202F ] }; // ␣ (espace insécable) _ (espace insécable fin)
