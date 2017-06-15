@@ -159,11 +159,11 @@ vnoremap y y']
 vnoremap Y y
 
 " get the differences since last saved
-"com! Diffs w !diff % - 
+com! Diffs w !diff % - 
 
 
 "print as PDF file
-"com!  PDF hardcopy > toPrint.pdf
+com!  PDF hardcopy > toPrint.pdf
 
 "python with virtualenv support
 "py3 << EOF
@@ -363,6 +363,8 @@ nnoremap è, :<C-f>
 nnoremap è/ /<C-f>
 noremap <C-q> <C-c><C-c>
 
+"inoremap <expr> <S-Tab>     pumvisible() ? '\<C-P>' : '\<C-V><S-Tab>'
+
 " w:mode = 0 for normal, 1 for insert, 2 for replace, 3 for visual
 " function AdaptCursor()
 "     if w:mode==0
@@ -436,8 +438,8 @@ augroup CursorLineNrColorSwap
     autocmd InsertLeave * call ResetCursorLineNrColor()
     autocmd CursorHold * call ResetCursorLineNrColor()
 
-    au BufNewFile,BufRead *.h, *.c
-        \ set expandtab! |
+    au BufNewFile,BufRead *.h,*.c,*.cc
+        \ set noexpandtab |
 
     au BufNewFile,BufRead *.py
         \ set tabstop=4 |
