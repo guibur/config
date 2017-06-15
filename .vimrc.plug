@@ -52,7 +52,7 @@ Bundle 'honza/vim-snippets'
 " SYNTAX CONTROLLER AND AUTOCOMPLETION
 "Bundle 'scrooloose/syntastic'
 Bundle 'maralla/validator.vim'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 
 " COPY THROUGH TMUX
 Bundle 'jpalardy/vim-slime'

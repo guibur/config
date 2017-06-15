@@ -88,7 +88,7 @@ nnoremap zé zMzr
 set linebreak
 let breakindentopt = 'sbr'
 let &showbreak = ' ↳ '
-set breakindent
+""set breakindent
 noremap t gj
 noremap <Down> gj
 noremap s gk
