@@ -20,6 +20,8 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'jpalardy/vim-slime'
 "Bundle 'altercation/vim-colors-solarized'
 Bundle 'ctrlpvim/ctrlp.vim'
+"Bundle 'yonchu/accelerated-smooth-scroll'
+"Bundle 'yuttie/comfortable-motion.vim'
 Bundle 'terryma/vim-smooth-scroll'
 "Bundle 'tpope/vim-surround'
 Bundle 'easymotion/vim-easymotion'
@@ -119,8 +121,6 @@ noremap s gk
 noremap <Up> gk
 noremap 0 g0
 noremap $ g$
-noremap àt J
-noremap às K
 noremap T j
 noremap S k
 noremap à0 0
@@ -135,6 +135,9 @@ noremap ) ]
 noremap [ (
 noremap ] ]
 
+" change tabs
+noremap às gt
+noremap àt gT
 
 " syntastic
 set laststatus=2

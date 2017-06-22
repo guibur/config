@@ -57,21 +57,21 @@ noremap àà gg
 noremap , :
 noremap : ,
 
-noremap <C-U> <C-r>
+"noremap <C-U> <C-r>
     
     " Désambiguation de {g}
     " —————————————————————
     " ligne écran précédente / suivante (à l'intérieur d'une phrase)
-noremap às àk
-noremap àt àj
+"noremap às àk
+"noremap àt àj
     " onglet précédant / suivant
-noremap àb àT
-noremap àé àt
-    " optionnel : {gB} / {gÉ} pour aller au premier / dernier onglet
-noremap àB :exe "silent! tabfirst"<CR>
-noremap àÉ :exe "silent! tablast"<CR>
+"noremap àb àt
+"noremap àé àt
+"    " optionnel : {gb} / {gé} pour aller au premier / dernier onglet
+"noremap àb :exe "silent! tabfirst"<cr>
+"noremap àÉ :exe "silent! tablast"<CR>
     " optionnel : {g"} pour aller au début de la ligne écran
-noremap à" à0
+"noremap à" à0
      
      " <> en direct
      " ————————————
