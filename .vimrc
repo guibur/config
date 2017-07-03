@@ -427,6 +427,10 @@ function! ResetCursorLineNrColor()
     highlight LineNr cterm=none ctermfg=3
 endfunction
 
+"silent !p=$(setxkbmap -query | grep variant | sed 's/variant: *\(.*\)[^\s]*,/\1/')
+"let p = $p
+"echo p
+
 " vnoremap <silent> <expr> <SID>SetCursorLineNrColorVisual SetCursorLineNrColorVisual()
 nnoremap <silent> v :call SetCursorLineNrColorVisual()<CR>v
 nnoremap <silent> V :call SetCursorLineNrColorVisual()<CR>V
@@ -459,6 +463,5 @@ augroup CursorLineNrColorSwap
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
     " caps lock as esc
-    au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-    " au VimLeave * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+    au VimEnter * silent !sh /home/ham/.xmodmap.launcher
 augroup END
