@@ -463,5 +463,5 @@ augroup CursorLineNrColorSwap
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
     " caps lock as esc
-    au VimEnter * silent !sh /home/ham/.xmodmap.launcher
+    au VimEnter * silent !sh ~/.xmodmap.launcher
 augroup END
