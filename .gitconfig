@@ -21,3 +21,4 @@
     ft = fetch
     st = status
     br = branch
+    ds = diff --stat
