@@ -22,18 +22,18 @@ noremap r l
 noremap t j
 noremap s k
 " {CR} = « haut / bas de l'écran »
-"noremap C H
-"noremap R L
+noremap C H
+noremap R L
 " {TS} = « joindre / aide »
 noremap T J
 noremap S K
 " Corollaire : repli suivant / précédent
 noremap zs zj
 noremap zt zk
-   
-   " {HJKL} <- [CTSR]
-   " ————————————————
-   " {J} = « Jusqu'à »            (j = suivant, J = précédant)
+
+" {HJKL} <- [CTSR]
+" ————————————————
+" {J} = « Jusqu'à »            (j = suivant, J = précédant)
 noremap j t
 noremap J T
    " {L} = « Change »             (l = attend un mvt, L = jusqu'à la fin de ligne)
@@ -55,7 +55,7 @@ noremap À G
 noremap àà gg
 
 noremap , :
-noremap : ,
+noremap ’ ,
 
 "noremap <C-U> <C-r>
     

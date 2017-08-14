@@ -18,7 +18,10 @@
     cm = commit -m
     co = checkout
     cb = checkout -b
+    cp = cherry-pick
     ft = fetch
     st = status
     br = branch
     ds = diff --stat
+[push]
+	default = matching

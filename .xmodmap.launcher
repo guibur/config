@@ -1,4 +1,0 @@
-kl=$(setxkbmap -query | grep variant | sed 's/variant: *\(.*\)[^\s]*,/\1/')
-if [ $kl = "bepo_Num" ]
-then xmodmap ~/.xmodmap.config
-fi

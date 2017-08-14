@@ -1,6 +1,6 @@
 set nocompatible              " required
 filetype off                  " required
-
+"
 " for installing vundle:
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " set the runtime path to include Vundle and initialize
@@ -80,7 +80,7 @@ set expandtab
 " when using the >> or << commands, shift lines by 4 spaces
 set shiftwidth=4
 
-" show a visual line under the cursor's current line 
+" show a visual line under the cursor's current line
 "set cursorline
 
 " show the matching part of the pair for [] {} and ()
@@ -99,6 +99,9 @@ nnoremap èi i_<Esc>:call SetCursorLineNrColorReplace()<CR>r
 nnoremap èA A_<Esc>:call SetCursorLineNrColorReplace()<CR>r
 nnoremap èI I_<Esc>:call SetCursorLineNrColorReplace()<CR>r
 
+" capitalize first letter word
+nnoremap àc m`b~``
+
 set expandtab
 set tabstop=4
 set shiftwidth=4
@@ -109,7 +112,6 @@ map <F2> :retab <CR> :wq! <CR>
 "nnoremap <C-S> W<C-S>
 "nnoremap <C-R> W<C-R>
 "nnoremap <C-C> W<C-C>
-
 
 set linebreak
 let breakindentopt = 'sbr'
@@ -130,6 +132,10 @@ vnoremap ié iw
 vnoremap iÉ iW
 vnoremap aé aw
 vnoremap aÉ aW
+nnoremap ié iw
+nnoremap iÉ iW
+nnoremap aé aw
+nnoremap aÉ aW
 noremap ( [
 noremap ) ]
 noremap [ (
@@ -222,27 +228,10 @@ nmap èy <Plug>SlimeLineSend
 nmap èY <Plug>SlimeConfig|<Plug>SlimeLineSend
 vmap èY <Plug>SlimeConfig|<Plug>SlimeRegionSend
 
-" use with tmux! or byobu
-" select second pane of current window with 0.1
-" useful commands:
-" byobu -L <session> attach
-" tmux new -s p3
-" tmux attach -t p3
-
 " for restarting ipython on left panel:
 " (silent execution requires redrawing afterwards)
 command IPyRestart silent execute "!byobu-tmux send-keys -t right 'exit' enter C-l && byobu-tmux send-keys -t right 'ipython' enter C-l" | execute ':redraw!'
 map <F10> :IPyRestart<CR>
-
-
-" solarize (color pattern)
-"syntax enable
-"let g:solarized_termtrans = 1 "For transparent background
-"let g:solarized_visibility = "high"
-"set background=dark
-"colorscheme solarized 
-" hi LineNr ctermfg=DarkGrey guifg=#2b506e guibg=#000000
-
 
 " CtrlP for opening files easily
 let g:ctrlp_map = '<c-p>'
@@ -265,14 +254,14 @@ map <C-C> zH
 noremap U <C-R>
 noremap ù U
 
-" ZSH like menu
-" When you type the first tab, it will complete as much as possible,
-" the second tab hit will provide a list, the third
-" and subsequent tabs will cycle through completion options
-" so you can complete the file without further keys
-set wildmode=longest,list,full
-" Sweet zsh-like autocompletion menu
-set wildmenu
+"" ZSH like menu
+"" When you type the first tab, it will complete as much as possible,
+"" the second tab hit will provide a list, the third
+"" and subsequent tabs will cycle through completion options
+"" so you can complete the file without further keys
+"set wildmode=longest,list,full
+"" Sweet zsh-like autocompletion menu
+"set wildmenu
 
 " vertically look for non-empty character
 " map <leader>j :Vertical f<CR>
@@ -284,23 +273,11 @@ noremap <silent> <c-s> :Vertical b<CR>
 " set paste mode
 set pastetoggle=<F12>
 
-" set indent mode for nathanaelkane/vim-indent-guides
-"let g:indent_guides_enable_on_vim_startup=1
-"let g:indent_guides_auto_colors=0
-"let s:darkgrey = '#2F4F4F'
-"let s:ligthgrey = '#708090'
-"hi IndentGuidesOdd  ctermbg=darkgrey
-"hi IndentGuidesEven ctermbg=grey
-
-
-
 " shortcut for changing tab
 nnoremap [1;5C gt
 nnoremap [1;5D gT
 nnoremap <C-Right> gt
 nnoremap <C-Left> gT
-" nnoremap > gt
-" nnoremap < gT
 
 map w <Plug>(easymotion-prefix)
 nmap wj <Plug>(easymotion-t)
@@ -361,37 +338,33 @@ nnoremap > >>
 nmap (b    ^c<C-s>^é
 nmap )b    ^c<C-t>^
 
+" to do the couple of curly brackets automatically
+inoremap {<CR> {<CR>}<Esc>ko
+
 " history
 nnoremap è, :<C-f>
 nnoremap è/ /<C-f>
 noremap <C-q> <C-c><C-c>
 
+" highlight unwanted spaces
+highlight UnwantedSpaces ctermbg=red ctermfg=white
+call matchadd('UnwantedSpaces', ' \| ', 51)
+highlight TrailingSpaces ctermbg=green
+call matchadd('TrailingSpaces', '\s\+$', 52)
+
+" highlight line too long (120 char)
+highlight OverLength ctermbg=blue ctermfg=white guibg=#592929
+call matchadd('OverLength', '\%121v.\+', 53)
+
 "inoremap <expr> <S-Tab>     pumvisible() ? '\<C-P>' : '\<C-V><S-Tab>'
 
-" w:mode = 0 for normal, 1 for insert, 2 for replace, 3 for visual
-" function AdaptCursor()
-"     if w:mode==0
-"         silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block
-"     elseif w:mode==1
-"         silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam
-"     elseif w:mode==2
-"         silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape underline
-"     else
-"         silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block
-"     endif
-" endfunction
-" au VimEnter  * let w:mode=0 | call AdaptCursor()
-" au InsertEnter * let w:mode=1 | call AdaptCursor()
-" au InsertLeave * let w:mode=0 | call AdaptCursor()
-" au WinEnter,FocusGained,TabEnter * call AdaptCursor()
-" au WinLeave,FocusLost,TabLeave * silent !gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block
 
 " Colorize line numbers in insert and visual modes
 " ------------------------------------------------
 function! SetCursorLineNrColorInsert(mode)
     " Insert mode: white
     if a:mode == "i"
-        highlight CursorLineNr ctermfg=9 
+        highlight CursorLineNr ctermfg=9
         highlight LineNr ctermfg=9
     " Replace mode: red
     elseif a:mode == "r"
@@ -445,8 +418,16 @@ augroup CursorLineNrColorSwap
     autocmd InsertLeave * call ResetCursorLineNrColor()
     autocmd CursorHold * call ResetCursorLineNrColor()
 
-    au BufNewFile,BufRead *.h,*.c,*.cc
+    au BufNewFile,BufRead *.tpp
+        \ set filetype=cpp
+
+    au BufNewFile,BufRead *.h,*.c,*.cc,*.tpp
         \ set noexpandtab |
+        \ set tabstop=8 |
+        \ set shiftwidth=8 |
+        \ silent SyntasticToggleMode |
+        \ set list lcs=tab:\|\ 
+        "\ let g:ycm_global_ycm_extra_conf = '/home/guillaumeburger/.vim/bundle/YouCompleteMe/python/ycm/.ycm_extra_conf.py' |
 
     au BufNewFile,BufRead *.py
         \ set tabstop=4 |
@@ -463,5 +444,5 @@ augroup CursorLineNrColorSwap
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
     " caps lock as esc
-    au VimEnter * silent !sh ~/.xmodmap.launcher
+    " au VimEnter * silent !sh ~/.xmodmap.launcher
 augroup END
