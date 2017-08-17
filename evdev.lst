@@ -444,6 +444,8 @@
   bre             fr: French (Breton)
   oci             fr: Occitan
   geo             fr: Georgian (France, AZERTY Tskapo)
+  bepo_perso      ps: Perso 1
+  bepo_perso_2    ps: Perso 2
   generic         gh: English (Ghana, multilingual)
   akan            gh: Akan
   ewe             gh: Ewe

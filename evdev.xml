@@ -2912,6 +2912,31 @@
     </layout>
     <layout>
       <configItem>
+        <name>ps</name>
+        
+        <shortDescription>ps</shortDescription>
+        <description>Perso</description>
+        <languageList>
+          <iso639Id>fra</iso639Id>
+        </languageList>
+      </configItem>
+      <variantList>
+        <variant>
+          <configItem>
+            <name>bepo_perso</name>
+            <description>Perso 1</description>
+          </configItem>
+        </variant>
+        <variant>
+          <configItem>
+            <name>bepo_perso_2</name>
+            <description>Perso 2</description>
+          </configItem>
+        </variant>
+      </variantList>
+    </layout>
+    <layout>
+      <configItem>
         <name>fr</name>
         
         <shortDescription>fr</shortDescription>
