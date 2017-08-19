@@ -11,6 +11,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
+"Bundle 'zeis/vim-kolor'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Bundle 'SirVer/ultisnips'
@@ -30,7 +31,6 @@ Plugin 'rbong/vim-vertical'
 "Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Yggdroot/indentLine'
 " Make sure to call :PluginInstall in vim after changing the list
-
 
 " For YouCompleteMe, you must install afterwards:
 " cd ~/.vim/bundle/YouCompleteMe
@@ -358,6 +358,13 @@ call matchadd('OverLength', '\%121v.\+', 53)
 
 "inoremap <expr> <S-Tab>     pumvisible() ? '\<C-P>' : '\<C-V><S-Tab>'
 
+" solarize (color pattern)
+"let g:solarized_termtrans = 1
+"let g:solarized_bold = 0
+"colorscheme solarized
+"syntax enable
+"set background=dark
+"colorscheme kolor
 
 " Colorize line numbers in insert and visual modes
 " ------------------------------------------------
