@@ -1,5 +1,17 @@
-kl=$(setxkbmap -query | grep variant | sed 's/variant: *\(.*\)[^\s]*,/\1/')
-if [ $kl = "bepo" ]
+get_current_xkblayout () {
+      current_input_nr=$(gsettings get org.gnome.desktop.input-sources current | \
+          awk '{ print $NF }')
+      shift=$(( 2 * ( $current_input_nr + 1 )))
+      gsettings get org.gnome.desktop.input-sources sources | tr -d "\',[]()" | \
+          awk -v cur="$shift" '{ print $cur }'
+}
+
+#kl=$(setxkbmap -query | grep variant | sed 's/variant: *\(.*\)[^\s]*,/\1/')
+#if [ $kl = "bepo" ]
+
+kl=$(get_current_xkblayout)
+
+if [ $kl = "fr+bepo" ]
 then xmodmap ~/.xmodmap.config
 fi
 
