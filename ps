@@ -132,11 +132,11 @@ xkb_symbols "bepo_perso_2" {
     ////////////////////////////////////////
 
     // Shift
-    key <LFSH> { type[group1]="TWO_LEVEL", symbols[group1] = [Shift, Caps_Lock ] };
-    key <RTSH> { type[group1]="TWO_LEVEL", symbols[group1] = [Shift, Caps_Lock ] };
+    key <LFSH> { type[group1]="EIGHT_LEVEL_SEMIALPHABETIC", symbols[group1] = [Shift, Shift, Shift, Shift, Caps_Lock, Caps_Lock, Caps_Lock, Caps_Lock ] };
+    key <RTSH> { type[group1]="EIGHT_LEVEL_SEMIALPHABETIC", symbols[group1] = [Shift, Shift, Shift, Shift, Caps_Lock, Caps_Lock, Caps_Lock, Caps_Lock ] };
     // Level 3
-    key <CAPS> { type[group1]="FOUR_LEVEL", symbols[group1] = [ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Lock, ISO_Level3_Lock ] };
-    key <BKSL> { type[group1]="FOUR_LEVEL", symbols[group1] = [ISO_Level3_Shift, ISO_Level3_Shift, ccedilla, Ccedilla ] };
+    key <CAPS> { type[group1]="EIGHT_LEVEL_SEMIALPHABETIC", symbols[group1] = [ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Lock, ISO_Level3_Lock, ISO_Level3_Lock, ISO_Level3_Lock ] };
+    key <BKSL> { type[group1]="EIGHT_LEVEL_SEMIALPHABETIC", symbols[group1] = [ISO_Level3_Shift, ISO_Level3_Shift, ccedilla, Ccedilla, ISO_Level3_Lock, ISO_Level3_Lock, ISO_Level3_Lock, ISO_Level3_Lock ] };
     // Level 5
     key <TLDE> { type[group1]="ONE_LEVEL", symbols[group1] = [ISO_Level5_Shift] };
 
