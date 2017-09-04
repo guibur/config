@@ -1,0 +1,92 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" General colorscheme
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" SOLARIZE (color pattern)
+"let g:solarized_termtrans = 1
+"let g:solarized_bold = 0
+"colorscheme solarized
+"syntax enable
+
+""" MONOKAI
+set t_Co=256
+set background=dark
+colorscheme monokai
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
+highlight Pmenu ctermfg=15 ctermbg=52 guifg=#ffffff guibg=#000000
+hi Comment ctermfg=111 ctermbg=NONE cterm=NONE guifg=#75715e guibg=NONE gui=NONE
+hi SpecialKey ctermfg=59 ctermbg=NONE cterm=NONE guifg=#49483e guibg=#3c3d37 gui=NONE
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Highlight of errors
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" highlight unwanted spaces
+highlight UnwantedSpaces ctermbg=red ctermfg=white
+call matchadd('UnwantedSpaces', ' \| ', 51)
+highlight TrailingSpaces ctermbg=green
+call matchadd('TrailingSpaces', '\s\+$', 52)
+
+" highlight line too long (120 char)
+highlight OverLength ctermbg=blue ctermfg=white guibg=#592929
+call matchadd('OverLength', '\%121v.\+', 53)
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colorize line numbers depending on mode
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! SetCursorLineNrColorInsert(mode)
+    " Insert mode: white
+    if a:mode == "i"
+        highlight CursorLineNr ctermfg=15
+        highlight LineNr ctermfg=15
+    " Replace mode: red
+    elseif a:mode == "r"
+        highlight CursorLineNr ctermfg=1
+        highlight LineNr ctermfg=1
+    endif
+endfunction
+
+function! SetCursorLineNrColorVisual()
+    set updatetime=0
+    " Visual mode: green
+    highlight CursorLineNr cterm=none ctermfg=2
+    highlight LineNr cterm=none ctermfg=2
+endfunction
+
+function! SetCursorLineNrColorReplace()
+    set updatetime=0
+    " Replace mode: red
+    highlight CursorLineNr cterm=none ctermfg=1
+    highlight LineNr cterm=none ctermfg=1
+endfunction
+
+function! SetCursorLineNrColorScript()
+    set updatetime=0
+    " script mode: blue
+    highlight CursorLineNr cterm=none ctermfg=4
+    highlight LineNr cterm=none ctermfg=4
+endfunction
+
+function! ResetCursorLineNrColor()
+    set updatetime=4000
+    highlight CursorLineNr cterm=none ctermfg=3
+    highlight LineNr cterm=none ctermfg=3
+endfunction
+
+nnoremap <silent> v :call SetCursorLineNrColorVisual()<CR>v
+nnoremap <silent> V :call SetCursorLineNrColorVisual()<CR>V
+nnoremap <silent> <C-v> :call SetCursorLineNrColorVisual()<CR><C-v>
+nnoremap <silent> g :call SetCursorLineNrColorReplace()<CR>r
+nnoremap , :call SetCursorLineNrColorScript()<CR>:
+nnoremap / :call SetCursorLineNrColorScript()<CR>/
+
+augroup CursorLineNrColorSwap
+    autocmd!
+    autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
+    autocmd InsertLeave * call ResetCursorLineNrColor()
+    autocmd CursorHold * call ResetCursorLineNrColor()
+    au VimEnter * call ResetCursorLineNrColor()
+augroup END
