@@ -1,14 +1,14 @@
 " {W} -> [É]
 " ——————————
 " On remappe W sur É :
-noremap é w
-noremap É W
-" Corollaire: on remplace les text objects aw, aW, iw et iW
-" " pour effacer/remplacer un mot quand on n’est pas au début (daé / laé).
-onoremap aé aw
-onoremap aÉ aW
-onoremap ié iw
-onoremap iÉ iW
+"noremap é w
+"noremap É W
+"" Corollaire: on remplace les text objects aw, aW, iw et iW
+"" " pour effacer/remplacer un mot quand on n’est pas au début (daé / laé).
+"onoremap aé aw
+"onoremap aÉ aW
+"onoremap ié iw
+"onoremap iÉ iW
  " Pour faciliter les manipulations de fenêtres, on utilise {W} comme un Ctrl+W :
 " noremap w <C-w>
 " noremap W <C-w><C-w>
@@ -41,18 +41,18 @@ noremap l c
 noremap ll cc
 noremap L C
    " {H} = « Remplace »           (h = un caractère slt, H = reste en « Remplace »)
-noremap g r
-noremap G R
+noremap h r
+noremap H R
    " {K} = « Substitue »          (k = caractère, K = ligne)
-noremap h s
-noremap H S
+"noremap h s
+"noremap H S
    " Corollaire : correction orthographique
 noremap ]h ]s
 noremap [h [s
 
-noremap à g
-noremap À G
-noremap àà gg
+"noremap à g
+"noremap À G
+"noremap àà gg
 
 noremap , :
 noremap ’ ,
@@ -80,13 +80,14 @@ noremap ’ ,
       
       " Remaper la gestion des fenêtres
       " ———————————————————————————————
-noremap wt <C-w>j
-noremap ws <C-w>k
-noremap wc <C-w>h
-noremap wr <C-w>l
-noremap wd <C-w>c
-noremap wo <C-w>s
-noremap wp <C-w>o
-noremap w<SPACE> :split<CR>
-noremap w<CR> :vsplit<CR>
+noremap àt <C-w>j
+noremap às <C-w>k
+noremap àc <C-w>h
+noremap àr <C-w>l
+noremap àq <C-w>c
+noremap àh <C-w>s
+noremap àv <C-w>v
+noremap ào <C-w>o
+noremap à<SPACE> :split<CR>
+noremap à<CR> :vsplit<CR>
 

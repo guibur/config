@@ -14,9 +14,20 @@ set background=dark
 colorscheme monokai
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
-highlight Pmenu ctermfg=15 ctermbg=52 guifg=#ffffff guibg=#000000
+highlight Pmenu ctermfg=15 ctermbg=56 guifg=#ffffff guibg=#000000
 hi Comment ctermfg=111 ctermbg=NONE cterm=NONE guifg=#75715e guibg=NONE gui=NONE
 hi SpecialKey ctermfg=59 ctermbg=NONE cterm=NONE guifg=#49483e guibg=#3c3d37 gui=NONE
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" C++ highlighting
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+
+hi! cCustomFunc  ctermfg=178 ctermbg=NONE
+hi! cCustomClass  ctermfg=81 ctermbg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Highlight of errors
@@ -79,7 +90,7 @@ endfunction
 nnoremap <silent> v :call SetCursorLineNrColorVisual()<CR>v
 nnoremap <silent> V :call SetCursorLineNrColorVisual()<CR>V
 nnoremap <silent> <C-v> :call SetCursorLineNrColorVisual()<CR><C-v>
-nnoremap <silent> g :call SetCursorLineNrColorReplace()<CR>r
+nnoremap <silent> h :call SetCursorLineNrColorReplace()<CR>r
 nnoremap , :call SetCursorLineNrColorScript()<CR>:
 nnoremap / :call SetCursorLineNrColorScript()<CR>/
 

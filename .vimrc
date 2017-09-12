@@ -50,6 +50,9 @@ set smartcase
 " reset normal effect of backspace
 set backspace=indent,eol,start
 
+" shortcut for easy buffer switching
+nnoremap <silent> ç :call SetCursorLineNrColorScript()<CR>:ls<CR>:b 
+
 " shortcut for inserting only one character
 nnoremap èa a_<Esc>:call SetCursorLineNrColorReplace()<CR>r
 nnoremap èi i_<Esc>:call SetCursorLineNrColorReplace()<CR>r
@@ -57,7 +60,11 @@ nnoremap èA A_<Esc>:call SetCursorLineNrColorReplace()<CR>r
 nnoremap èI I_<Esc>:call SetCursorLineNrColorReplace()<CR>r
 
 " capitalize first letter word
-nnoremap àc m`b~``
+nnoremap gc m`b~``
+
+" open splits in a more logical way
+set splitbelow
+set splitright
 
 set expandtab
 set tabstop=4
@@ -69,6 +76,8 @@ map <F2> :retab <CR> :wq! <CR>
 "nnoremap <C-S> W<C-S>
 "nnoremap <C-R> W<C-R>
 "nnoremap <C-C> W<C-C>
+
+nnoremap zé zMzr
 
 set linebreak
 let breakindentopt = 'sbr'
@@ -82,25 +91,25 @@ noremap 0 g0
 noremap $ g$
 noremap T j
 noremap S k
-noremap à0 0
-noremap à$ $
-nnoremap àp '[V']
-vnoremap ié iw
-vnoremap iÉ iW
-vnoremap aé aw
-vnoremap aÉ aW
-nnoremap ié iw
-nnoremap iÉ iW
-nnoremap aé aw
-nnoremap aÉ aW
+noremap g0 0
+noremap g$ $
+nnoremap gp '[V']
+"vnoremap ié iw
+"vnoremap iÉ iW
+"vnoremap aé aw
+"vnoremap aÉ aW
+"nnoremap ié iw
+"nnoremap iÉ iW
+"nnoremap aé aw
+"nnoremap aÉ aW
 noremap ( [
 noremap ) ]
 noremap [ (
 noremap ] ]
 
 " change tabs
-noremap às gt
-noremap àt gT
+noremap gs gt
+noremap gt gT
 
 
 
@@ -163,10 +172,10 @@ nnoremap <C-Right> gt
 nnoremap <C-Left> gT
 
 
-noremap k ge
-noremap K gE
+noremap ê ge
+noremap ê gE
 
-nnoremap àv gv
+"nnoremap àv gv
 nnoremap zt zt
 
 " delete without copy
@@ -184,10 +193,13 @@ nnoremap èD D
 vnoremap èD D
 noremap l "_c
 noremap L "_C
+noremap ll "_cc
 noremap èl c
 noremap èL C
+noremap èll cc
 nnoremap x "_x
 nnoremap èx x
+nnoremap dl "_cc<ESC>
 
 nnoremap Y y$
 
@@ -203,6 +215,8 @@ noremap èC :s.^\(\s*\)\/\/ .\1.g<CR>
 " indent
 nnoremap < <<
 nnoremap > >>
+vnoremap è> >gv
+vnoremap è< <gv
 
 " python go to beginning/end of block
 nmap (b    ^c<C-s>^é
@@ -234,7 +248,7 @@ augroup TypeDependentSettings
         \ set tabstop=8 |
         \ set shiftwidth=8 |
         \ set foldmethod=syntax |
-        \ set foldlevel=1 |
+        \ set foldlevel=50 |
         \ set list lcs=tab:\|\ 
         "\ set list lcs=tab:\|\ 
         "\ let g:ycm_global_ycm_extra_conf = '/home/guillaumeburger/.vim/bundle/YouCompleteMe/python/ycm/.ycm_extra_conf.py' |
@@ -250,7 +264,7 @@ augroup TypeDependentSettings
         \ set comments+=:# |
         \ set formatoptions+=ro |
         \ set foldmethod=indent |
-        \ set foldlevel=0 |
+        \ set foldlevel=50 |
         " \ set nowrap |
 
     " ignore tree if it is the last left
