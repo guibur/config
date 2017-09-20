@@ -25,6 +25,9 @@ set mouse=a
 " show commands
 set showcmd
 
+" Autoload files that have changed outside of vim
+set autoread
+
 " set tabs to have 4 spaces
 set ts=4
 
@@ -65,6 +68,9 @@ nnoremap gc m`b~``
 " open splits in a more logical way
 set splitbelow
 set splitright
+
+" redraw only when we need to (i.e. don't redraw when executing a macro)
+set lazyredraw
 
 set expandtab
 set tabstop=4
@@ -226,10 +232,8 @@ nmap )b    ^c<C-t>^
 inoremap {<CR> {<CR>}<Esc>ko
 
 " history
-nnoremap è, :<C-f>
-nnoremap è/ /<C-f>
+nnoremap q, q:
 noremap <C-q> <C-c><C-c>
-
 
 
 "inoremap <expr> <S-Tab>     pumvisible() ? '\<C-P>' : '\<C-V><S-Tab>'

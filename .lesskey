@@ -1,0 +1,7 @@
+t forw-scroll
+s back-scroll
+j next-tag
+J prev-tag
+:o toggle-option o
+T forw-line-force
+S back-line-force

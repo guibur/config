@@ -146,7 +146,8 @@ nnoremap <silent> àd :bd<CR>
 nnoremap <silent> àw :bw<CR>
 nnoremap <silent> àn :bn<CR>
 nnoremap <silent> àp :bp<CR>
-nnoremap <silent> àe :b#<CR>
+nnoremap <silent> àl :b#<CR>
+nnoremap <silent> àm :bm<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -201,7 +202,7 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " do not forget to have leader defined
 "let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:ycm_server_python_interpreter = '/usr/bin/python'
-let g:ycm_goto_buffer_command = 'new-tab'
+"let g:ycm_goto_buffer_command = 'new-tab'
 noremap èo :YcmCompleter GoTo<CR>
 noremap èé :YcmCompleter GoToReferences<CR>
 

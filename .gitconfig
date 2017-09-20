@@ -21,7 +21,7 @@
     cb = checkout -b
     cp = cherry-pick
     ft = fetch
-    st = status
+    sta = status
     stt = !"git status | less -X"
     br = branch
     ds = diff --stat
@@ -31,3 +31,7 @@
 	default = matching
 [pager]
 	status = true
+[pack]
+    theads = 1
+    deltaCacheSize = 128m
+    windowMemory = 50m
