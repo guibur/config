@@ -1,6 +1,7 @@
 set nocompatible              " required
 filetype off                  " required
 
+map <S-é> <Esc>
 
 source ~/.vimrc.plug
 source ~/.vimrc.bepo
@@ -16,6 +17,7 @@ set encoding=utf-8
 
 " show line numbers
 set relativenumber
+map èn :set relativenumber!<CR>
 set number
 " show in bottom-right-hand corner number of line and column
 set ruler
@@ -68,6 +70,7 @@ nnoremap gc m`b~``
 " open splits in a more logical way
 set splitbelow
 set splitright
+set diffopt+=vertical
 
 " redraw only when we need to (i.e. don't redraw when executing a macro)
 set lazyredraw
@@ -179,7 +182,7 @@ nnoremap <C-Left> gT
 
 
 noremap ê ge
-noremap ê gE
+noremap Ê gE
 
 "nnoremap àv gv
 nnoremap zt zt
@@ -188,13 +191,11 @@ nnoremap zt zt
 nnoremap d "_d
 nnoremap dd "_dd
 vnoremap d "_d
-vnoremap dd "_dd
 nnoremap D "_D
 vnoremap D "_D
 nnoremap èd d
 nnoremap èdd dd
 vnoremap èd d
-vnoremap èdd dd
 nnoremap èD D
 vnoremap èD D
 noremap l "_c
@@ -206,17 +207,42 @@ noremap èll cc
 nnoremap x "_x
 nnoremap èx x
 nnoremap dl "_cc<ESC>
+vnoremap p "_dP
 
 nnoremap Y y$
 
-" comment and uncomment
-noremap è# :s.^\(\s*\)\(\S\).\1# \2.g<CR>
-":s/^/# /g<CR>
-noremap èc :s.^\(\s*\)\(\S\).\1\/\/ \2.g<CR>
-" :s/^/\/\/ /g<CR>
-noremap èu :s.^\(\s*\)# .\1.g<CR>
-noremap èC :s.^\(\s*\)\/\/ .\1.g<CR>
-" :s/^# g<CR>:s/^\/\/ //g<CR>
+" par configuration
+" h1 means the first line has a different syntax
+" T8 means that tabs are considered as 8 spaces
+set formatprg=par\ 100T8h0
+" nnoremap èQ :call SetCursorLineNrColorScript()<CR>:<C-U>set formatprg=par\ 120T8h0p19
+" vnoremap èQ :call SetCursorLineNrColorScript()<CR>:<C-U>set formatprg=par\ 120T8h0p19
+" nnoremap èq gq'[V']:s. \{2,8}.\t.g<CR>
+" vnoremap èq gq'[V']:s. \{2,8}.\t.g<CR>
+set textwidth=120
+set formatoptions=roq
+
+function! s:formatWrap(width)
+    let col=virtcol('.') - 1
+    execute "set formatprg=par\\ " . a:width . "T8p" . col
+endfunction
+function! s:formatHeaderWrap(width)
+    let col=virtcol('.') - 1
+    execute "set formatprg=par\\ " . a:width . "T8p" . col
+    execute "normal! $"
+    if virtcol('.') > a:width
+        execute "normal! 0120lF i\<cr>\<esc>0v^hd" . col . "i \<esc>"
+        execute "normal! Vkgq"
+    endif
+endfunction
+" nnoremap <script> <silent> èqq :call <SID>formatWrap()<CR>
+nnoremap <script> èqq ^W:call <SID>formatWrap(120)<CR>gqq
+nnoremap <script> èQQ :call <SID>formatWrap(120)<CR>gqq
+vnoremap <script> èqq <Esc>:call <SID>formatWrap(120)<CR>gvgq
+nnoremap <script> èqt ^W:call <SID>formatWrap(120)<CR>gqq:'[,']s. \{2,8}.\t.g<CR>
+nnoremap <script> èQT :call <SID>formatWrap(120)<CR>gqq:'[,']s. \{2,8}.\t.g<CR>
+vnoremap <script> èqt <Esc>:call <SID>formatWrap(120)<CR>gvgq:'[,']s. \{2,8}.\t.g<CR>
+nnoremap <script> èqh :call <SID>formatHeaderWrap(120)<CR>
 
 " indent
 nnoremap < <<
@@ -235,15 +261,21 @@ inoremap {<CR> {<CR>}<Esc>ko
 nnoremap q, q:
 noremap <C-q> <C-c><C-c>
 
+" add possibility to write in a read-only file
+cmap w!! w !sudo tee >/dev/null %
+
 
 "inoremap <expr> <S-Tab>     pumvisible() ? '\<C-P>' : '\<C-V><S-Tab>'
 
+noremap <silent> èpp :set paste<CR>
+noremap <silent> èpn :set nopaste<CR>
 
 
 source ~/.vimrc.color
 
 
 augroup TypeDependentSettings
+	au!
     au BufNewFile,BufRead *.tpp
         \ set filetype=cpp
 
@@ -266,7 +298,6 @@ augroup TypeDependentSettings
         \ set autoindent |
         \ set fileformat=unix |
         \ set comments+=:# |
-        \ set formatoptions+=ro |
         \ set foldmethod=indent |
         \ set foldlevel=50 |
         " \ set nowrap |
@@ -274,6 +305,15 @@ augroup TypeDependentSettings
     " ignore tree if it is the last left
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-    " caps lock as esc
-    " au VimEnter * silent !sh ~/.xmodmap.launcher
 augroup END
+
+function! SwitchSourceHeader()
+  "update!
+  if (expand ("%:e") == "cc")
+    find **/%:t:r.h
+  else
+    find **/%:t:r.cc
+  endif
+endfunction
+
+nmap ès :call SwitchSourceHeader()<CR>

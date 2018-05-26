@@ -1,4 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""  " 
 " Todos
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -25,60 +25,81 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" COLORTHEMES
-Plugin 'sickill/vim-monokai'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-"Bundle 'zeis/vim-kolor'
-"Bundle 'altercation/vim-colors-solarized'
-Plugin 'blueyed/vim-diminactive'
-
 " PLUGIN INSTALLER
 Plugin 'gmarik/Vundle.vim'
+
+" COLORTHEMES
+Plugin 'sickill/vim-monokai'
+"Bundle 'zeis/vim-kolor'
+"Bundle 'altercation/vim-colors-solarized'
+" Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'blueyed/vim-diminactive'
+Plugin 'luochen1990/rainbow'
 
 " FILE EXPLORER AND SEARCH
 Plugin 'scrooloose/nerdtree'
 Bundle 'ctrlpvim/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
 
 " WINDOW TO HELP NAVIGATE THROUGH FILE WITH TAGS
 Plugin 'majutsushi/tagbar'
 
 " BUFFER HANDLER
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'muziqiushan/vim-bufonly'
+Plugin 'vim-scripts/scratch.vim'
 
-" SNIPPETS (wtf is this ??)
+" SNIPPETS
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 
 " SYNTAX CONTROLLER AND AUTOCOMPLETION
-"Bundle 'scrooloose/syntastic'
+" Bundle 'scrooloose/syntastic'
 Bundle 'maralla/validator.vim'
+" Plugin 'w0rp/ale'
 Bundle 'Valloric/YouCompleteMe'
+Plugin 'congma/pylint.vim'
+Plugin 'tell-k/vim-autopep8'
 
 " COPY THROUGH TMUX
 Bundle 'jpalardy/vim-slime'
 
 " SMOOTH MOTION TO HELP READING THROUGH
-"Bundle 'yonchu/accelerated-smooth-scroll'
-"Bundle 'yuttie/comfortable-motion.vim'
 Bundle 'terryma/vim-smooth-scroll'
 
 " HELP TO MOVE ARROUND IN A FILE
 "Bundle 'tpope/vim-surround' TODO configure for bépo
 Bundle 'easymotion/vim-easymotion'
 Plugin 'rbong/vim-vertical'
+Plugin 'tpope/vim-surround'
 
 " LAUNCH GIT FUNCTIONS IN VIM
 Bundle 'tpope/vim-fugitive'
+Plugin 'shumphrey/fugitive-gitlab.vim' " TODO debug
 
 " INDENT CLARIFICATION WITH | AND ¦
-"Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Yggdroot/indentLine'
+Plugin 'Vimjas/vim-python-pep8-indent'
+
+" TEXT OBJECTS
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'vim-scripts/camelcasemotion'
+
+" COMMENT
+Plugin 'scrooloose/nerdcommenter'
+
+" Easy switch btw true and false
+Plugin 'AndrewRadev/switch.vim'
+" Align things
+Plugin 'godlygeek/tabular'
+
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 " All of your Plugins must be added before the following line
 
 call vundle#end()            " required
 filetype plugin indent on    " requiredenable syntax highlighting
+filetype plugin on
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -137,8 +158,23 @@ nnoremap à<C-P> :CtrlPBuffer<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Bufexplorer : open a window to easily switch btw buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" change default mapping
+function! s:NERDTreeChangeDefaultMapping()
+    echo "OK"
+    nmap <buffer> H <F1>
+    nmap <buffer> l t
+    nmap <buffer> h f
+    nmap <buffer> è s
+    nmap <buffer> É S
+    unmap <buffer> s
+    unmap <buffer> S
+    unmap <buffer> t
+    unmap <buffer> <F1>
+endfunction
+
+" mapping for calling
 let g:bufExplorerSortBy='number'
-nnoremap àà ::BufExplorer<CR>
+nnoremap àà :BufExplorer<CR>
 set hidden
 set confirm
 
@@ -148,6 +184,9 @@ nnoremap <silent> àn :bn<CR>
 nnoremap <silent> àp :bp<CR>
 nnoremap <silent> àl :b#<CR>
 nnoremap <silent> àm :bm<CR>
+
+
+nnoremap <silent> à0 :BO<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -166,7 +205,7 @@ let g:diminactive_enable_focus = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
-" Validator
+" Validator: syntax checker
 """"""""""""""""""""""""""""""""""""""""""""""""
 set laststatus=2
 let g:validator_python_checkers = ['flake8']
@@ -176,24 +215,17 @@ let g:validator_python_flake8_args = '--max-line-length=120'
 "let g:validator_python_flake8_binary = '/Users/maralla/.dotfiles/virtualenvs/py27/bin/flake8'
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" ALE : syntax check
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:ale_fixers = {
+" \   'python': ['pylint'],
+" \}
+
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " You Complete Me
 """"""""""""""""""""""""""""""""""""""""""""""
-" Make UltiSnips compatible with YouCompleteMe
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
 
 let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python':1 }
 " autoclose and go to definition
@@ -202,9 +234,45 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " do not forget to have leader defined
 "let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:ycm_server_python_interpreter = '/usr/bin/python'
+let g:ycm_complete_in_comments = 1
 "let g:ycm_goto_buffer_command = 'new-tab'
-noremap èo :YcmCompleter GoTo<CR>
-noremap èé :YcmCompleter GoToReferences<CR>
+nnoremap èo :YcmCompleter GoTo<CR>
+nnoremap èé :YcmCompleter GoToReferences<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" UltiSnips
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" UltiSnips triggering
+" Remap to avoid conflicts with YouCompletMe
+let g:UltiSnipsExpandTrigger = 'èè'
+let g:UltiSnipsJumpForwardTrigger = 'èè'
+let g:UltiSnipsJumpBackwardTrigger = 'èo'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+"" Make UltiSnips compatible with YouCompleteMe
+"function! g:UltiSnips_Complete()
+"    call UltiSnips#ExpandSnippet()
+"    if g:ulti_expand_res == 0
+"        if pumvisible()
+"            return "\<C-n>"
+"        else
+"            call UltiSnips#JumpForwards()
+"            if g:ulti_jump_forwards_res == 0
+"               return "\<TAB>"
+"            endif
+"        endif
+"    endif
+"    return ""
+"endfunction
+"
+"au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsListSnippets="<c-e>"
+"" this mapping Enter key to <C-y> to chose the current highlight item
+"" and close the selection list, same as other IDEs.
+"" CONFLICT with some plugins like tpope/Endwise
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -260,3 +328,71 @@ vmap èY <Plug>SlimeConfig|<Plug>SlimeRegionSend
 noremap <silent> <c-t> :Vertical f<CR>
 noremap <silent> <c-s> :Vertical b<CR>
 " require 'stty -ixon' in the .bashrc to disable the freezing behaviour of <c-s>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Camel case and undercore motion and text objects
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:bufExplorerDisableDefaultKeyMapping = 1  " Avoid conflicts for <leader>b… mapping
+
+map <nowait> <space>w <Plug>CamelCaseMotion_w
+map <nowait> <space>b <Plug>CamelCaseMotion_b
+map <nowait> <space>e <Plug>CamelCaseMotion_e
+
+omap i<space>w <Plug>CamelCaseMotion_iw
+xmap i<space>w <Plug>CamelCaseMotion_iw
+omap i<space>b <Plug>CamelCaseMotion_ib
+xmap i<space>b <Plug>CamelCaseMotion_ib
+omap i<space>e <Plug>CamelCaseMotion_ie
+xmap i<space>e <Plug>CamelCaseMotion_ie
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Nerd commenter: comment and uncomment easily
+""""""""""""""""""""""""""""""""""""""""""""""""""
+map ècc <plug>NERDCommenterComment
+map ècu <plug>NERDCommenterUncomment
+map ècb <plug>NERDCommenterMinimal
+map ècy <plug>NERDCommenterYank
+map èc$ <plug>NERDCommenterToEOL
+map <silent> èca A <esc>:execute "normal \<plug>NERDCommenterAppend"<CR>A
+
+let NERDSpaceDelims=1
+" need to change plugin:
+" - remove space after # in python comment symbols to avoid a double space
+"   after # (need to keep NERDSpaceDelims at 1 for double space before end
+"   of line comment
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim surround refactor mapping for bépo
+"""""""""""""""""""""""""""""""""""""""""""""""""
+let g:surround_no_mappings = 1
+let g:surround_no_insert_mappings = 1
+nmap dk  <Plug>Dsurround
+nmap lk  <Plug>Csurround
+nmap lK  <Plug>CSurround
+nmap yk  <Plug>Ysurround
+nmap yK  <Plug>YSurround
+nmap ykk <Plug>Yssurround
+nmap yKk <Plug>YSsurround
+nmap yKK <Plug>YSsurround
+xmap K   <Plug>VSurround
+xmap gK  <Plug>VgSurround
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autopep 8, for automatic correction of python code
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:autopep8_max_line_length=120
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pylint for stronger error detection
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:pylint_onwrite = 0
+autocmd FileType python compiler pylint
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim fugitive for gitlab
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:fugitive_gitlab_domains = ['https://gitlab.local.wandercraft.eu']

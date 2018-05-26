@@ -25,7 +25,7 @@ noremap s k
 noremap C H
 noremap R L
 " {TS} = « joindre / aide »
-noremap T J
+noremap <C-J> J
 noremap S K
 " Corollaire : repli suivant / précédent
 noremap zs zj
@@ -44,8 +44,8 @@ noremap L C
 noremap h r
 noremap H R
    " {K} = « Substitue »          (k = caractère, K = ligne)
-"noremap h s
-"noremap H S
+unmap k
+unmap K
    " Corollaire : correction orthographique
 noremap ]h ]s
 noremap [h [s

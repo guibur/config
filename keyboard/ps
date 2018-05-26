@@ -154,7 +154,8 @@ xkb_symbols "bepo_perso_2" {
     key <ESC> { type[group1]="ONE_LEVEL", symbols[group1] = [Escape ] };
     key <AD12> { type[group1]="ONE_LEVEL", symbols[group1] = [Escape] };
     key <AE12> { type[group1] = "ONE_LEVEL", [Delete] };
-    key <RALT> { type[group1] = "ONE_LEVEL", [BackSpace] };
+    // key <RALT> { type[group1] = "ONE_LEVEL", [BackSpace] };
+    key <RALT> { type[group1]="ONE_LEVEL", symbols[group1] = [Escape] };
     key <SPCE> { [           space, nobreakspace,          space,          U202F ] }; // ␣ (espace insécable) _ (espace insécable fin)
 
     ////////////////////////////////////////

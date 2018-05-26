@@ -2,7 +2,7 @@
 	name = guillaumeb
 	email = guillaume.burger@wandercraft.eu
 [core]
-	editor = vim
+    editor = 'nvr' --remote-wait-silent
 [alias]
     lg = !"git lg1"
     lgg = !"git lg1 | less -X"
@@ -21,12 +21,18 @@
     cb = checkout -b
     cp = cherry-pick
     ft = fetch
+    fa = fetch --all
     sta = status
     stt = !"git status | less -X"
     br = branch
     ds = diff --stat
     ca = !"git commit --amend --no-edit"
     cae = commit --amend
+    pfo = push -f origin
+    pfoh = push -f origin HEAD
+    po = push origin
+    poh = push origin HEAD
+    pdo = push --delete origin
 [push]
 	default = matching
 [pager]
