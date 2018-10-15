@@ -17,10 +17,11 @@ set mouse=a
 
 " line width
 set textwidth=120
-set formatoptions=roq
 
 " indent and fold config
 set autoindent
+set copyindent
+" set preserveindent
 set expandtab
 set tabstop=4
 set shiftwidth=4

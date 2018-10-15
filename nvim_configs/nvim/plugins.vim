@@ -7,6 +7,7 @@ Plug 'terryma/vim-smooth-scroll'
 Plug 'vim-scripts/camelcasemotion'
 Plug 'majutsushi/tagbar'
 Plug 'rbong/vim-vertical'
+Plug 'tpope/vim-unimpaired'
 " Colors
 Plug 'blueyed/vim-diminactive'
 Plug 'luochen1990/rainbow'
@@ -20,8 +21,10 @@ Plug 'neomake/neomake'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
+Plug 'sbdchd/neoformat'
 " Help navigation
-Plug 'jlanzarotta/bufexplorer'
+Plug 'guibur/neovim-fuzzy'
+Plug 'guibur/bufexplorer'
 Plug 'muziqiushan/vim-bufonly'
 Plug 'qpkorr/vim-bufkill'
 Plug 'vim-scripts/scratch.vim'
@@ -31,9 +34,14 @@ Plug 'jpalardy/vim-slime'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'scrooloose/nerdtree'
 " Language help
-" Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' } " Works awesome, but super slow
+Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'arakashic/chromatica.nvim' " Strange coloring. Maybe need personalization…
 Plug 'tyru/open-browser.vim'
 Plug 'AndrewRadev/switch.vim'
+Plug 'craigemery/vim-autotag'
+" Terminal plugins
+Plug 'brettanomyces/nvim-editcommand'
 
 
 " List ends here. Plugins become visible to Vim after this call.
@@ -86,17 +94,54 @@ nmap é. <Plug>(easymotion-repeat)
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Highlighter
 """"""""""""""""""""""""""""""""""""""""""""""""""
-let g:highlighter#auto_update = 2
-let g:highlighter#project_root_signs = ['.git']
+" let g:highlighter#auto_update = 0
+" nmap gc :HighlighterUpdate<CR>
+" let g:Highlighter#disabled_languages = ['py']
+" let g:highlighter#project_root_signs = ['.git']
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Switch
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:case_switch_custom_definitions =
+    \ [
+    \   {
+    \     '\<\(\l\)\(\l\+\(\u\l\+\)\+\)\>': '\=toupper(submatch(1)) . submatch(2)',
+    \     '\<\(\u\l\+\)\(\u\l\+\)\+\>': "\\=tolower(substitute(submatch(0), '\\(\\l\\)\\(\\u\\)', '\\1_\\2', 'g'))",
+    \     '\<\(\l\+\)\(_\l\+\)\+\>': '\U\0',
+    \     '\<\(\u\+\)\(_\u\+\)\+\>': "\\=tolower(substitute(submatch(0), '_', '-', 'g'))",
+    \     '\<\(\l\+\)\(-\l\+\)\+\>': "\\=substitute(submatch(0), '-\\(\\l\\)', '\\u\\1', 'g')",
+    \   }
+    \ ]
+let b:switch_custom_definitions = [
+        \   {
+        \     '\CRight': 'Left',
+        \     '\CLeft' : 'Right',
+        \     '\Ctrue' : 'false',
+        \     '\Cfalse': 'true',
+        \     '\CRIGHT': 'LEFT',
+        \     '\CLEFT' : 'RIGHT',
+        \   }
+        \]
+nnoremap gc :call switch#Switch({'definitions': g:case_switch_custom_definitions})<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Chromatica
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:chromatica#libclang_path='/usr/lib/llvm-3.9/lib/'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Deoplete
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" source ~/.config/nvim/plugins/ctab.vim
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab>
     \ pumvisible() ? "\<C-n>" : "<TAB>"
 inoremap <expr> <S-Tab>
-    \ pumvisible() ? "\<C-p>" : "S-TAB"
+    \ pumvisible() ? "\<C-p>" : "<S-TAB>"
+" inoremap <expr> <Esc>
+    " \ pumvisible() ? deoplete#close_popup() : "\<Esc>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Neomake
@@ -119,6 +164,11 @@ nmap <silent> àk :TagbarClose<CR>
 let g:tagbar_map_togglesort = 'è'
 let g:tagbar_map_toggleautoclose = 'a'
 let g:tagbar_sort = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tags
+""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> à] :!cd ~/dev/wandercode && ctags -R . && cd -<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -237,5 +287,42 @@ augroup END
 
 " vertically look for non-empty character
 noremap <silent> <c-t> :Vertical f<CR>
+noremap ]& <c-t>
 noremap <silent> <c-s> :Vertical b<CR>
 " require 'stty -ixon' in the .bashrc to disable the freezing behaviour of <c-s>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim unimpaired
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" make shortcuts easier
+nmap ]ê <Plug>unimpairedMoveDown
+xmap ]ê <Plug>unimpairedMoveSelectionDown
+xmap [ê <Plug>unimpairedMoveSelectionUp
+nmap [ê <Plug>unimpairedMoveUp
+nmap ]œ& & :call <SNR>170_setup_paste()<CR>o
+nmap ]œ& & :call <SNR>170_setup_paste()<CR>O
+" unmap >p
+" unmap >P
+" unmap <p
+" unmap <P
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fuzzy
+""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <M-f> :FuzzyOpen<CR>
+tnoremap <M-f> <C-\><C-n>:FuzzyOpen<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Edit command from terminal
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:editcommand_prompt = '➭'
+let g:editcommand_no_mappings = 1
+tmap <c-x> <Plug>EditCommand
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Manual plugins
+" source ~/.config/nvim/plugins/ctab.vim  "Inserted in the middle of deoplete to have better support of tab.

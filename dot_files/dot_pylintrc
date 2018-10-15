@@ -3,7 +3,7 @@ extension-pkg-whitelist=numpy,nose,nose.tools,numpy.testing,numpy.linalg
 
 [MESSAGES CONTROL]
 # disabled messages
-disable=missing-docstring
+disable=missing-docstring, invalid-name
 
 [TYPECHECK]
 ignored-modules = numpy, numpy.testing

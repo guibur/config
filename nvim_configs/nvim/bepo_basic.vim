@@ -13,8 +13,8 @@ noremap R L
 noremap <C-J> J
 noremap S K
 " Corollaire : repli suivant / précédent
-noremap zs zj
-noremap zt zk
+" noremap zs zj
+" noremap zt zk
 
 " {HJKL} <- [CTSR]
 " ————————————————

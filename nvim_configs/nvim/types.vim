@@ -1,12 +1,13 @@
 augroup TypeDependentSettings
-	au!
+    au!
     au BufNewFile,BufRead *.tpp
         \ set filetype=cpp
 
     au BufNewFile,BufRead *.h,*.c,*.cc,*.tpp
         \ set noexpandtab |
-        \ set tabstop=8 |
-        \ set shiftwidth=8 |
+        \ set tabstop=4 |
+        \ set softtabstop=4 |
+        \ set shiftwidth=4 |
         \ set foldmethod=syntax |
         \ set list lcs=tab:\|\ 
 
@@ -21,7 +22,7 @@ augroup TypeDependentSettings
         \ set foldmethod=indent |
 
     " ignore tree if it is the last left
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
     au TermOpen * call s:termSpecificLocalChanges() | call s:termSpecificChangingChanges()
     au BufEnter,WinEnter * call s:termSpecificChangingChanges()
@@ -36,9 +37,13 @@ fun! s:termSpecificLocalChanges()
     endif
 endfun
 fun! s:termSpecificChangingChanges()
-    if &buftype ==# 'terminal'
+    if &buftype ==# 'terminal' || &buftype ==# 'nofile'
         hi clear OverLength
+        highlight MakeErrors cterm=bold ctermfg=124
+        highlight MakeWarnings cterm=bold ctermfg=202
     else
         highlight OverLength ctermbg=blue ctermfg=white guibg=#592929
+        hi clear MakeErrors
+        hi clear MakeWarnings
     endif
 endfun
