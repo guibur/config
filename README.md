@@ -17,3 +17,19 @@ Add in bashrc
 
 ```
 
+# TODO on a new computer
+
+## For work
+- Encrypt home folder
+- Install veracrypt
+- Add certificates on Chromium (settings-> advanced ->  and Firefox
+
+## Little things
+- change mouse side
+- add Alt+5/4/6/2/8 for lecture/davance/return/volume down/volume up [For Ubuntu 18.04, it is in settings/keyboard]
+
+## keyboard
+
+## neovim and byobu
+
+## configs
