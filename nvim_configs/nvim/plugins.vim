@@ -40,6 +40,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tyru/open-browser.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'craigemery/vim-autotag'
+Plug 'guibur/vim-debugstring'
 " Terminal plugins
 Plug 'brettanomyces/nvim-editcommand'
 
@@ -318,7 +319,17 @@ tnoremap <M-f> <C-\><C-n>:FuzzyOpen<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 let g:editcommand_prompt = '➭'
 let g:editcommand_no_mappings = 1
-tmap <c-x> <Plug>EditCommand
+tmap <M-e> <Plug>EditCommand
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Debug strings
+""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> èbb :execute "normal \<Plug>DumpDebugStringVar"<CR>
+nnoremap èbr :ResetDebugCounter<CR>
+nnoremap <silent> èbs viw"vy
+vnoremap <silent> èbs "vy
+nnoremap <silent> èbv :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>
+nnoremap <silent> èbe :execute "normal \<Plug>DumpDebugStringExpr"<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
