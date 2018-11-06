@@ -144,6 +144,9 @@ export EDITOR=$VISUAL
 # Convenience aliases
 alias md='mkdir'
 
+alias pt='python'
+alias ipt='ipython'
+
 alias ml='make -j8'
 alias mn='make -j4'
 alias mm='make'
@@ -165,6 +168,8 @@ alias àsl='cd ~/dev/wandercode/wanderbrain/simulation && switchToSimu'
 
 alias update_tags="ctags -R ."
 alias wdc_tags="cd ~/dev/wandercode && ctags -R . && cd -"
+
+alias disk_usage="du -sch .[\!.]* * | sort -h"
 
 
 source $HOME/.zshrc.wdc
