@@ -28,7 +28,7 @@ Add in bashrc
 - Install veracrypt
 - Add certificates on Chromium (settings-> advanced ->  and Firefox
 - Install printer
-- Install mattermost and trello (
+- Install mattermost and trello (https://github.com/danielchatfield/trello-desktop)
 
 ## Little things
 - change mouse side
