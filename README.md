@@ -21,6 +21,10 @@ Add in bashrc
 
 ## For work
 - Encrypt home folder
+   0- Install ecryptfs
+   1- `sudo adduser --encrypt-home <user>*` pour creer une nouvelle sesion avec un home crypter
+   2 - se donner les droit sudo `sudo usermod -aG sudo <user>`
+   3- se logger sur la nouvelle session et supprimer la premiere
 - Install veracrypt
 - Add certificates on Chromium (settings-> advanced ->  and Firefox
 
