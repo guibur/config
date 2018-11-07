@@ -28,11 +28,14 @@ Add in bashrc
 - Install veracrypt
 - Add certificates on Chromium (settings-> advanced ->  and Firefox
 - Install printer
+- Install mattermost and trello (
 
 ## Little things
 - change mouse side
 - add Alt+5/4/6/2/8 for lecture/davance/return/volume down/volume up [For Ubuntu 18.04, it is in settings/Devices/keyboard]
+- show dock on all displays
 - Install ssh key for github and gitlab
+- Install pip and pip3 (`sudo apt-get install python-pip python3-pip`)
 
 ## keyboard
 #### With sudo rights
@@ -64,6 +67,13 @@ Add in bashrc
 ## terminal preparation
 - Install zsh (and make it default with `chsh -s $(which zsh)` and log out/in)
 - Install neovim (by apt-get in Ubuntu 18 !!)
+- Install neovim-remote (`pip3 install neovim-remote`)
 - Install byobu (by apt-get in Ubuntu 18 !!)
+- Copy `.zshrc` (don't forget to change user name if need be!)
+- Import oh-my-zsh from `git@github.com:guibur/oh-my-zsh.git` (don't forget to change user name in themes/guillaumeburger.zsh-theme if need be)
+- Copy all files and folders except plugins to ~/.config/nvim
+- Open new neovim do `:PlugInstall` and `:UpdateRemotePlugins`
 
 ## configs
+- Do `lesskey path/to/config/dot_files/lesskey`
+- Copy dot_files in home (gitconfig, pylintrc, noserc, byobu folder)
