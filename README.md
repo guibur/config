@@ -27,6 +27,7 @@ Add in bashrc
    3. se logger sur la nouvelle session et supprimer la premiere
 - Install veracrypt
 - Add certificates on Chromium (settings-> advanced ->  and Firefox
+- Install printer
 
 ## Little things
 - change mouse side
@@ -60,6 +61,9 @@ Add in bashrc
 ```
 - copy `ps` file to `/usr/share/X11/xkb/symbols`
 
-## neovim and byobu
+## terminal preparation
+- Install zsh (and make it default with `chsh -s $(which zsh)` and log out/in)
+- Install neovim (by apt-get in Ubuntu 18 !!)
+- Install byobu (by apt-get in Ubuntu 18 !!)
 
 ## configs
