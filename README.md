@@ -76,8 +76,9 @@ Add in bashrc
 - Import oh-my-zsh from `git@github.com:guibur/oh-my-zsh.git` (don't forget to change user name in themes/guillaumeburger.zsh-theme if need be)
 - Copy all files and folders except plugins to ~/.config/nvim
 - Open new neovim do `:PlugInstall` and `:UpdateRemotePlugins`
-- Install `sudo apt-get install exuberant-ctags`
+- Install `sudo apt-get install exuberant-ctags silversearcher-ag fzy`
 
 ## configs
 - Do `lesskey path/to/config/dot_files/lesskey`
 - Copy dot_files in home (gitconfig, pylintrc, noserc, byobu folder)
+(change agignore to ignore in neovim-fuzzy plugin)
