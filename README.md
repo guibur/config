@@ -76,6 +76,7 @@ Add in bashrc
 - Import oh-my-zsh from `git@github.com:guibur/oh-my-zsh.git` (don't forget to change user name in themes/guillaumeburger.zsh-theme if need be)
 - Copy all files and folders except plugins to ~/.config/nvim
 - Open new neovim do `:PlugInstall` and `:UpdateRemotePlugins`
+- Install `sudo apt-get install exuberant-ctags`
 
 ## configs
 - Do `lesskey path/to/config/dot_files/lesskey`
