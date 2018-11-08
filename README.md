@@ -36,6 +36,7 @@ Add in bashrc
 - show dock on all displays
 - Install ssh key for github and gitlab
 - Install pip and pip3 (`sudo apt-get install python-pip python3-pip`)
+- Install and configure numlockx (https://doc.ubuntu-fr.org/numlockx)
 
 ## keyboard
 #### With sudo rights
@@ -62,7 +63,9 @@ Add in bashrc
       </variantList>
     </layout>
 ```
+- Add to `/usr/share/console-setup/KeyboardNames.pl` the language. (TODO: develop if working)
 - copy `ps` file to `/usr/share/X11/xkb/symbols`
+- Change default keyboard in `/etc/default/keyboard`
 
 ## terminal preparation
 - Install zsh (and make it default with `chsh -s $(which zsh)` and log out/in)
