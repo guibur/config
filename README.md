@@ -78,6 +78,18 @@ Add in bashrc
 - Open new neovim do `:PlugInstall` and `:UpdateRemotePlugins`
 - Install `sudo apt-get install exuberant-ctags silversearcher-ag fzy`
 
+#### Problem of compatibility python2 and 3 with deoplete and work configuration
+- install virtualenv (pip install)
+- create virtualenv with python3 and pip install neovim
+- add to zshrc:
+```
+    if ! { [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; } then
+        export PYTHONPATH=
+        source $HOME/neovim_env/neovim_env/bin/activate
+        nvim
+    fi
+```
+
 ## configs
 - Do `lesskey path/to/config/dot_files/lesskey`
 - Copy dot_files in home (gitconfig, pylintrc, noserc, byobu folder)
