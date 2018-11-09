@@ -92,5 +92,6 @@ Add in bashrc
 
 ## configs
 - Do `lesskey path/to/config/dot_files/lesskey`
+- Copy files in `dot_files/config` in `~/.config` (flake8, pep8)
 - Copy dot_files in home (gitconfig, pylintrc, noserc, byobu folder)
 (change agignore to ignore in neovim-fuzzy plugin)
