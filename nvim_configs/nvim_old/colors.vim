@@ -28,9 +28,9 @@ call matchadd('TrailingSpaces', '\s\+$', 52)
 " highlight the errors in the terminal
 " highlight MakeErrors ctermbg=124 ctermfg=white
 highlight MakeErrors cterm=bold ctermfg=124
-call matchadd('MakeErrors', '.*\[E\].*', 55)
+call matchadd('MakeErrors', '.*: error: .*', 55)
 highlight MakeWarnings cterm=bold ctermfg=202
-call matchadd('MakeWarnings', '.*\[W\].*', 54)
+call matchadd('MakeWarnings', '.*: warning: .*', 54)
 
 " highlight line too long (120 char)
 highlight OverLength ctermbg=blue ctermfg=white guibg=#592929

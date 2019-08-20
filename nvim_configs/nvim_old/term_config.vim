@@ -1,6 +1,5 @@
 " Terminal escape sequence.
 tnoremap <Esc> <C-\><C-n>
-tnoremap <C-n> <Esc>
 
 " Prevent exiting nvim unintetionally
 " cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
@@ -24,7 +23,7 @@ function! ConfirmQuit(writeFile)
 endfu
 
 cnoremap <silent> q<CR>  :call ConfirmQuit(0)<CR>
-" cnoremap <silent x<CR>  :call ConfirmQuit(1)<CR>
+cnoremap <silent> x<CR>  :call ConfirmQuit(1)<CR>
 
 " Enter in insert mode terminal
 " augroup TerminalInsert

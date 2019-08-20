@@ -4,11 +4,19 @@ augroup TypeDependentSettings
         \ set filetype=cpp
 
     au BufNewFile,BufRead *.h,*.c,*.cc,*.tpp
-        \ set cindent |
-        \ set cino=(0 |
+        \ set noexpandtab |
+        \ set tabstop=4 |
+        \ set softtabstop=4 |
+        \ set shiftwidth=4 |
         \ set foldmethod=syntax |
+        \ set list lcs=tab:\|\ 
 
     au BufNewFile,BufRead *.py
+        \ set tabstop=4 |
+        \ set softtabstop=4 |
+        \ set shiftwidth=4 |
+        \ set expandtab |
+        \ set autoindent |
         \ set fileformat=unix |
         \ set comments+=:# |
         \ set foldmethod=indent |
@@ -31,7 +39,11 @@ endfun
 fun! s:termSpecificChangingChanges()
     if &buftype ==# 'terminal' || &buftype ==# 'nofile'
         hi clear OverLength
+        highlight MakeErrors cterm=bold ctermfg=124
+        highlight MakeWarnings cterm=bold ctermfg=202
     else
         highlight OverLength ctermbg=blue ctermfg=white guibg=#592929
+        hi clear MakeErrors
+        hi clear MakeWarnings
     endif
 endfun

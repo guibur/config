@@ -67,65 +67,6 @@ vnoremap è< <gv
 nnoremap èa a_<Esc>r
 nnoremap èi i_<Esc>r
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
-" Swap cleaning
-""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap àw :!rm -r ~/.local/share/nvim/swap/*<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""
-" Jump stays in buffer
-""""""""""""""""""""""""""""""""""""""""""""""""
-function! JumpInFile(back, forw)
-    let [n, i] = [bufnr('%'), 1]
-    let p = [n] + getpos('.')[1:]
-    sil! exe 'norm!1' . a:forw
-    while 1
-        let p1 = [bufnr('%')] + getpos('.')[1:]
-        if n == p1[0] | break | endif
-        if p == p1
-            sil! exe 'norm!' . (i-1) . a:back
-            break
-        endif
-        let [p, i] = [p1, i+1]
-        sil! exe 'norm!1' . a:forw
-    endwhile
-endfunction
-
-nnoremap <silent> <c-s-i> <c-i>
-nnoremap <silent> <c-s-o> <c-o>
-nnoremap <silent> <c-o> :call JumpInFile("\<c-i>", "\<c-o>")<cr>
-nnoremap <silent> <c-i> :call JumpInFile("\<c-o>", "\<c-i>")<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Diffing buffers
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:diffed_buffers=[]
-function! DiffText(a, b, diffed_buffers)
-    enew
-    setlocal buftype=nowrite
-    call add(a:diffed_buffers, bufnr('%'))
-    call setline(1, split(a:a, "\n"))
-    diffthis
-    vnew
-    setlocal buftype=nowrite
-    call add(a:diffed_buffers, bufnr('%'))
-    call setline(1, split(a:b, "\n"))
-    diffthis
-endfunction
-function! WipeOutDiffs(diffed_buffers)
-    for buffer in a:diffed_buffers
-        execute 'bwipeout! '.buffer
-    endfor
-    let g:diffed_buffers=[]
-endfunction
-vnoremap <special> èf "fy:call DiffText(@0, @f, g:diffed_buffers)<CR>
-nnoremap <special> èF :call WipeOutDiffs(g:diffed_buffers)<CR>
-
-" Show buffer path
-" nnoremap èpt :echo @%<CR>  " Useless <C-g> prints details on file !!
-
-
 " """"""""""""""""""""""""""""""""""""""""""""""""""
 " " Autowrapping with par
 " """"""""""""""""""""""""""""""""""""""""""""""""""

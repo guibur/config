@@ -3,11 +3,16 @@ extension-pkg-whitelist=numpy,nose,nose.tools,numpy.testing,numpy.linalg
 
 [MESSAGES CONTROL]
 # disabled messages
-disable=missing-docstring, invalid-name
+disable=missing-docstring, too-many-instance-attributes, too-many-statements, too-many-locals
 
 [TYPECHECK]
-ignored-modules = numpy, numpy.testing
+ignored-modules = numpy, numpy.testing, wdc_dynamicsteller, wdc_math, wdc_optimal, wdc_filtering, wdc_task, wdc_transition, wdc_mpc, wdc_telemetryloader, wdc
 ignored-classes = numpy, numpy.testing
+
+[BASIC]
+variable-rgx=[a-z_][a-z0-9_]{1,30}$|d*[a-zA-Z]$
+argument-rgx=[a-z_][a-z0-9_]{1,30}$|d*[a-zA-Z]$
+attr-rgx=[a-z_][a-z0-9_]{1,30}$|d*[a-zA-Z]$
 
 
 [FORMAT]

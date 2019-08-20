@@ -13,20 +13,15 @@ Plug 'blueyed/vim-diminactive'
 Plug 'luochen1990/rainbow'
 Plug 'itchyny/lightline.vim'
 " Help syntax
-Plug 'Shougo/deoplete.nvim', { 'tag': '4.1', 'do': ':UpdateRemotePlugins' }  " tag 4.1 is necessary because 5.0 is compatible with nvim 0.3+ only, and default in ubuntu 18.04 is nvim 0.2.2
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
-Plug 'Vimjas/vim-python-pep8-indent'  " Necessary for python indentation
-Plug 'psf/black'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
 Plug 'sbdchd/neoformat'
-Plug 'tpope/vim-abolish'  " Allow case sensitive replacement with `:Subvert/.../.../`
-Plug 'tell-k/vim-autopep8'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
 " Help navigation
 Plug 'guibur/neovim-fuzzy'
 Plug 'guibur/bufexplorer'
@@ -34,13 +29,10 @@ Plug 'muziqiushan/vim-bufonly'
 Plug 'qpkorr/vim-bufkill'
 Plug 'vim-scripts/scratch.vim'
 Plug 'szw/vim-maximizer'
-Plug 'tpope/vim-fugitive'  " Easy support for git in vim
+Plug 'tpope/vim-fugitive'
 Plug 'jpalardy/vim-slime'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'scrooloose/nerdtree'
-Plug 'guibur/CurtineIncSw.vim'  " Swap from source file to header file
-Plug 'guibur/far.vim'
-Plug 'haya14busa/incsearch.vim'
 " Language help
 " Plug 'KeitaNakamura/highlighter.nvim', { 'do': ':UpdateRemotePlugins' } " Works awesome, but super slow
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -48,13 +40,9 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tyru/open-browser.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'craigemery/vim-autotag'
-Plug 'bergercookie/vim-debugstring'
+Plug 'guibur/vim-debugstring'
 " Terminal plugins
 Plug 'brettanomyces/nvim-editcommand'
-
-" Specific visualizers
-Plug 'lervag/vimtex'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 
 " List ends here. Plugins become visible to Vim after this call.
@@ -87,40 +75,22 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 map é <Plug>(easymotion-prefix)
-map éé <Plug>(easymotion-bd-f)
-map éw <Plug>(easymotion-bd-w)
-map ée <Plug>(easymotion-bd-e)
-map én <Plug>(easymotion-vim-n)
-map éN <Plug>(easymotion-vim-N)
-map é/ <Plug>(easymotion-sn)
-" map éW <Plug>(easymotion-W)
-" map éàe <Plug>(easymotion-ge)
-" map éàE <Plug>(easymotion-gE)
-" nmap ét <Plug>(easymotion-j)
-" nmap és <Plug>(easymotion-w)
-" nmap ér <Plug>(easymotion-sn)
-" nmap éy <Plug>(easymotion-bd-t)
-" nmap éx <Plug>(easymotion-bd-n)
-" nmap é* <Plug>(easymotion-next)
-" nmap é# <Plug>(easymotion-prev)
-" nmap én <Plug>(easymotion-bd-n)
-map étt <Plug>(easymotion-sol-j)
-map été <Plug>(easymotion-eol-j)
-map éss <Plug>(easymotion-sol-k)
-map ésé <Plug>(easymotion-eol-k)
+nmap éé <Plug>(easymotion-bd-f)
+nmap éj <Plug>(easymotion-t)
+nmap éJ <Plug>(easymotion-T)
+nmap éw <Plug>(easymotion-w)
+nmap éW <Plug>(easymotion-W)
+nmap éàe <Plug>(easymotion-ge)
+nmap éàE <Plug>(easymotion-gE)
+nmap ét <Plug>(easymotion-j)
+nmap és <Plug>(easymotion-w)
+nmap ér <Plug>(easymotion-sn)
+nmap éy <Plug>(easymotion-bd-t)
+nmap éx <Plug>(easymotion-bd-n)
+nmap é* <Plug>(easymotion-next)
+nmap é# <Plug>(easymotion-prev)
+nmap én <Plug>(easymotion-bd-n)
 nmap é. <Plug>(easymotion-repeat)
-
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-set hlsearch
-let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Highlighter
@@ -144,12 +114,12 @@ let g:case_switch_custom_definitions =
     \     '\<\(\l\+\)\(-\l\+\)\+\>': "\\=substitute(submatch(0), '-\\(\\l\\)', '\\u\\1', 'g')",
     \   }
     \ ]
-let g:switch_custom_definitions = [
+let b:switch_custom_definitions = [
         \   {
         \     '\CRight': 'Left',
         \     '\CLeft' : 'Right',
-        \     '\Cright': 'left',
-        \     '\Cleft' : 'right',
+        \     '\Ctrue' : 'false',
+        \     '\Cfalse': 'true',
         \     '\CRIGHT': 'LEFT',
         \     '\CLEFT' : 'RIGHT',
         \   }
@@ -165,6 +135,7 @@ nnoremap gc :call switch#Switch({'definitions': g:case_switch_custom_definitions
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Deoplete
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" source ~/.config/nvim/plugins/ctab.vim
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab>
     \ pumvisible() ? "\<C-n>" : "<TAB>"
@@ -181,11 +152,10 @@ call neomake#configure#automake('nrw', 750)
 let g:neomake_py_pylint_maker = {
     \ 'args': ['%:p', '--max-line-length=120']
     \ }
+
 let g:neomake_py_flake_maker = {
     \ 'args': ['%:p', '--max-line-length=120']
     \ }
-let g:neomake_python_enabled_makers = ['pylint', 'flake8']
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Tag bar
@@ -199,8 +169,7 @@ let g:tagbar_sort = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Tags
 """"""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> à] :!cd ~/wdc_workspace/src/wandercode && ctags -R --exclude='**/build/**' --exclude='**/dist/**' && cd -<CR>
-nmap <silent> à[ :!cd ~/wdc_workspace/src/wandercode2 && ctags -R --exclude='**/build/**' --exclude='**/dist/**' && cd -<CR>
+nmap <silent> à] :!cd ~/dev/wandercode && ctags -R . && cd -<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -344,9 +313,6 @@ nmap ]œ& & :call <SNR>170_setup_paste()<CR>O
 """"""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <M-f> :FuzzyOpen<CR>
 tnoremap <M-f> <C-\><C-n>:FuzzyOpen<CR>
-nnoremap èg viw"gy:FuzzyGrep <C-r>g
-nnoremap èG :FuzzyGrep 
-vnoremap èg "gy:FuzzyGrep <C-r>g
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Edit command from terminal
@@ -365,53 +331,9 @@ vnoremap <silent> èbs "vy
 nnoremap <silent> èbv :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>
 nnoremap <silent> èbe :execute "normal \<Plug>DumpDebugStringExpr"<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Abolish
-""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:abolish_no_mappings = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Switch source / header
 """"""""""""""""""""""""""""""""""""""""""""""""""
-map ès :call CurtineIncSw()<CR>
-
-let g:vimtex_compiler_progname = 'nvr'
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:tex_fast=0
-let g:vimtex_quickfix_mode=0
-let g:tex_no_error=1
-
-set conceallevel=1
-
-xmap  ésD <Plug>(vimtex-delim-toggle-modifier-reverse)
-nmap  ésD <Plug>(vimtex-delim-toggle-modifier-reverse)
-xmap  ésd <Plug>(vimtex-delim-toggle-modifier)
-nmap  ésd <Plug>(vimtex-delim-toggle-modifier)
-nmap  ésc <Plug>(vimtex-cmd-toggle-star)
-nmap  ése <Plug>(vimtex-env-toggle-star)
-
-nmap  lsd <Plug>(vimtex-delim-change-math)
-nmap  lsc <Plug>(vimtex-cmd-change)
-nmap  lse <Plug>(vimtex-env-change)
-nmap  ls$ <Plug>(vimtex-env-change-math)
-
-xmap lsm <plug>(vimtex-cmd-create)
-
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Neosnippet
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-imap g<TAB>     <Plug>(neosnippet_expand_or_jump)
-smap g<TAB>     <Plug>(neosnippet_expand_or_jump)
-xmap g<TAB>     <Plug>(neosnippet_expand_target)
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" Markdown-preview
-""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:mkdp_auto_close = 0
-
-let g:black_linelength = 120
-let g:black_targetversion = 'py27'
+" Manual plugins
+" source ~/.config/nvim/plugins/ctab.vim  "Inserted in the middle of deoplete to have better support of tab.

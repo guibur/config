@@ -1,16 +1,16 @@
-" """"""""""""""""""""""""""""""""""""""""""""""""""
-" " Switch source to header
-" """"""""""""""""""""""""""""""""""""""""""""""""""
-" function! SwitchSourceHeader()
-  " "update!
-  " if (expand ("%:e") == "cc")
-    " find **/%:t:r.h
-  " else
-    " find **/%:t:r.cc
-  " endif
-" endfunction
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Switch source to header
+""""""""""""""""""""""""""""""""""""""""""""""""""
+function! SwitchSourceHeader()
+  "update!
+  if (expand ("%:e") == "cc")
+    find **/%:t:r.h
+  else
+    find **/%:t:r.cc
+  endif
+endfunction
 
-" nmap ès :call SwitchSourceHeader()<CR>
+nmap ès :call SwitchSourceHeader()<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -52,13 +52,11 @@ function! s:formatCppHeaderWrap(width)
         " Remove the \keywords in all except first line.
         execute "normal! ^W" . (col_1 - col_0) . "r "
         " Replaces the spaces at the beginning of the line by tabs.
-        " execute "normal! ^hv0r\<tab>:'[,']s.\\t\\{2,4}.\\t.g\<CR>"
-        execute "normal! k"
+        execute "normal! ^hv0r\<tab>:'[,']s.\\t\\{2,4}.\\t.g\<CR>k"
         let row = row - 1
     endwhile
     " Replaces the spaces at the beginning of the line by tabs.
-    " execute "normal! ^hv0r\<tab>:'[,']s.\\t\\{2,4}.\\t.g\<CR>k"
-
+    execute "normal! ^hv0r\<tab>:'[,']s.\\t\\{2,4}.\\t.g\<CR>k"
     " execute "normal! ^"
     " let col_start_comment = virtcol('.') - 1
     " execute "normal! /\\t\<cr>l"
@@ -104,8 +102,7 @@ vnoremap <script> èQT <Esc>:call <SID>formatWrap(120)<CR>gvgq:'[,']s. \{2,4}.\t
 " nnoremap <script> èqh :call <SID>formatCppHeaderWrap(120)<CR>:call <SID>replaceSpacesByTabs()<CR>
 nnoremap <script> èqh :call <SID>formatCppHeaderWrap(120)<CR>
 " vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>:call <SID>replaceSpacesByTabs()<CR>
-" vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>gvgq:call <SID>replaceSpacesByTabs()<CR>
-vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>gvgq
+vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>gvgq:call <SID>replaceSpacesByTabs()<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -144,39 +141,3 @@ endfunction
 
 " nnoremap <script> è<TAB> :call <SID>replaceFollowingTabsBySpaces(4)<CR>
 nnoremap <script> è<TAB> :call <SID>alignFunctionsWithSpaces(4)<CR>
-
-"""""""""""""
-" SWAP WORDS
-"""""""""""""
-function! Mirror(dict)
-    for [key, value] in items(a:dict)
-        let a:dict[value] = key
-    endfor
-    return a:dict
-endfunction
-
-function! S(number)
-    return submatch(a:number)
-endfunction
-
-function! SwapWords(dict, ...)
-    let words = keys(a:dict) + values(a:dict)
-    let words = map(words, 'escape(v:val, "|")')
-    if(a:0 == 1)
-        let delimiter = a:1
-    else
-        let delimiter = '/'
-    endif
-    let pattern = '\v(' . join(words, '|') . ')'
-    exe 's' . delimiter . pattern . delimiter
-        \ . '\=' . string(Mirror(a:dict)) . '[S(0)]'
-        \ . delimiter . 'ge'
-endfunction
-
-function! SwapLR()
-    exe 'S/left/foo/ge'
-    exe 'S/right/left/ge'
-    exe 'S/foo/right/ge'
-endfunction
-
-vnoremap <script> gs :call SwapLR()<CR>

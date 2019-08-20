@@ -16,27 +16,18 @@ set number
 set mouse=a
 
 " line width
-" set textwidth=120
-
-" Copy to outside programs
-" for copy with ^C
-set clipboard+=unnamedplus
-" for copy with middle mouse button
-set clipboard+=unnamed
+set textwidth=120
 
 " indent and fold config
 set autoindent
 set copyindent
 " set preserveindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 set expandtab
+set tabstop=4
+set shiftwidth=4
 
 set foldlevel=50
 set foldmethod=syntax
-
-set list lcs=tab:\|\ 
 
 " Ignore case for searches
 set ignorecase
