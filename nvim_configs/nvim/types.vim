@@ -3,15 +3,15 @@ augroup TypeDependentSettings
     au BufNewFile,BufRead *.tpp
         \ set filetype=cpp
 
-    au BufNewFile,BufRead *.h,*.c,*.cc,*.tpp
-        \ set cindent |
-        \ set cino=(0 |
-        \ set foldmethod=syntax |
+    " au BufNewFile,BufRead *.h,*.c,*.cc,*.tpp
+        " \ set cindent |
+        " \ set cino=(0 |
+        " \ set foldmethod=syntax |
 
-    au BufNewFile,BufRead *.py
-        \ set fileformat=unix |
-        \ set comments+=:# |
-        \ set foldmethod=indent |
+    " au BufNewFile,BufRead *.py
+        " \ set fileformat=unix |
+        " \ set comments+=:# |
+        " \ set foldmethod=indent |
 
     " ignore tree if it is the last left
     " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
