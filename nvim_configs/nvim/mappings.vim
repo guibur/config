@@ -236,3 +236,5 @@ inoremap {<CR> {<CR>}<Esc>ko
 
 " Avoid accidental exit from vim.
 nmap ZZ ==
+
+nnoremap è> /\v[<=>]{7}<CR>

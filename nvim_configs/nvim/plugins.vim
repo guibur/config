@@ -6,12 +6,12 @@ Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'vim-scripts/camelcasemotion'
 Plug 'majutsushi/tagbar'
-Plug 'rbong/vim-vertical'
+Plug 'rbong/vim-vertical'  " Motion block by block (mapped to <C-t> and <C-s>)
 Plug 'tpope/vim-unimpaired'
 " Colors
 Plug 'blueyed/vim-diminactive'
 Plug 'luochen1990/rainbow'
-Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'  " colorized bottom bar
 " Help syntax
 Plug 'Shougo/deoplete.nvim', { 'tag': '4.1', 'do': ':UpdateRemotePlugins' }  " tag 4.1 is necessary because 5.0 is compatible with nvim 0.3+ only, and default in ubuntu 18.04 is nvim 0.2.2
 Plug 'zchee/deoplete-jedi'
@@ -20,7 +20,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
 Plug 'Vimjas/vim-python-pep8-indent'  " Necessary for python indentation
 Plug 'psf/black'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'  " displays indentation levels with spaces (with ¦)
 Plug 'godlygeek/tabular'
 Plug 'sbdchd/neoformat'
 Plug 'tpope/vim-abolish'  " Allow case sensitive replacement with `:Subvert/.../.../`
@@ -36,7 +36,6 @@ Plug 'vim-scripts/scratch.vim'
 Plug 'szw/vim-maximizer'
 Plug 'tpope/vim-fugitive'  " Easy support for git in vim
 Plug 'jpalardy/vim-slime'
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'scrooloose/nerdtree'
 Plug 'guibur/CurtineIncSw.vim'  " Swap from source file to header file
 Plug 'guibur/far.vim'
@@ -351,7 +350,7 @@ vnoremap èg "gy:FuzzyGrep <C-r>g
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Edit command from terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""
-let g:editcommand_prompt = '➭'
+let g:editcommand_prompt = '[➭$:]'
 let g:editcommand_no_mappings = 1
 tmap <M-e> <Plug>EditCommand
 
@@ -362,7 +361,8 @@ nnoremap <silent> èbb :execute "normal \<Plug>DumpDebugStringVar"<CR>
 nnoremap èbr :ResetDebugCounter<CR>
 nnoremap <silent> èbs viw"vy
 vnoremap <silent> èbs "vy
-nnoremap <silent> èbv :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>
+nnoremap <silent> èbv :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('@@@myvar@@@')<CR>/@@@myvar@@@<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3ec<{1:@@@myvartoreplace@@@}><ESC>la[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/@@@myvar@@@<CR>vEc]<Space>=<ESC>/@@@myvar@@@<CR>v10lc<\|1\|><ESC>A<`0`><ESC>?@@@myvartoreplace@@@<CR>v19lc
+nnoremap <silent> èbV :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>
 nnoremap <silent> èbe :execute "normal \<Plug>DumpDebugStringExpr"<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -415,3 +415,18 @@ let g:mkdp_auto_close = 0
 
 let g:black_linelength = 120
 let g:black_targetversion = 'py27'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" OpenBrowser
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+let g:openbrowser_search_engines = {
+            \   'lilo': 'https://search.lilo.org/searchweb.php?q={query}'
+            \}
+let g:openbrowser_default_search = 'lilo'
+let g:openbrowser_browser_commands = [
+\   {'name': 'chromium-browser',
+\    'args': ['{browser}', '{uri}']}
+\]
+nmap gx <plug>(openbrowser-smart-search)
+vmap gx <plug>(openbrowser-smart-search)
