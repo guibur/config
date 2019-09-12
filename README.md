@@ -1,10 +1,32 @@
 # config
-- Title and Command/Custom command: `/usr/bin/byobua`.
+- Title and Command/Custom command: `/usr/bin/byobu`.
 - Edit/Keyboard Shortcuts: uncheck `Enable menu access keys`.
 - `ln -s` the dot files in dot_files, zshrcs and vimrcs to home.
 
 # keyboard config with sudo rights
-evdev.lst and evdev.xml to copy in /usr/share/X11/xkb/rules
+~~evdev.lst and evdev.xml to copy in /usr/share/X11/xkb/rules~~
+Add to /usr/share/X11/xkb/rules/evdev.xml:
+```
+    <layout>
+      <configItem>
+        <name>ps</name>
+        
+        <shortDescription>perso</shortDescription>
+        <description>Bepo perso</description>
+        <languageList>
+          <iso639Id>fra</iso639Id>
+        </languageList>
+      </configItem>
+      <variantList>
+        <variant>
+          <configItem>
+            <name>bepo_perso</name>
+            <description>Bepo perso</description>
+          </configItem>
+        </variant>
+      </variantList>
+    </layout>
+```
 
 ps to `ln -s` in /usr/share/X11/xkb/symbols
 
