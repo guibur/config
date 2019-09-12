@@ -5,6 +5,7 @@
 
 # keyboard config with sudo rights
 ~~evdev.lst and evdev.xml to copy in /usr/share/X11/xkb/rules~~
+
 Add to /usr/share/X11/xkb/rules/evdev.xml:
 ```
     <layout>
