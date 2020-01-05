@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/guillaumeburger/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -53,7 +53,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, zsh-git-prompt, zsh-autosuggestions)
+plugins=(git)
 bindkey '^\n' autosuggest-execute
 bindkey '^\t' forward-word
 
@@ -98,8 +98,8 @@ stty -ixon
 # . ~/.xmodmap.launcher  > out.log 2> /dev/null
 
 # export local path byobu
-export PATH=$HOME/lib/byobu/bin:$PATH
-export BYOBU_PREFIX=$HOME/lib/byobu
+# export PATH=$HOME/lib/byobu/bin:$PATH
+# export BYOBU_PREFIX=$HOME/lib/byobu
 
 # alias for files
 ld () {
@@ -172,14 +172,14 @@ alias wdc_tags="cd ~/dev/wandercode && ctags -R . && cd -"
 alias disk_usage="du -sch .[\!.]* * | sort -h"
 
 
-source $HOME/.zshrc.wdc
+# source $HOME/.zshrc.wdc
 
 
 if ! { [ -n "$TMUX" ]; } then
     byobu
 else
     if ! { [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; } then
-        cd ~/dev/wandercode
+        # cd ~/dev/wandercode
         nvim -c te
     fi
 fi
