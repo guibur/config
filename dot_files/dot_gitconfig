@@ -36,6 +36,7 @@
     po = push -u origin
     poh = push -u origin HEAD
     pdo = push --delete origin
+    ap = add --patch
     upm = "upstream/master"
     buldozer = !"git add --all && git commit --amend --no-edit && git push -f origin HEAD"
     cleanup-branch = "!git checkout upstream/master && git branch --merged | grep -v -P '^\\*|master|develop' | xargs -n1 -r git branch -d"
