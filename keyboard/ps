@@ -10,8 +10,8 @@ xkb_symbols "bepo_perso" {
     ////////////////////////////////////////
 
     // Shift
-    key <LFSH> { type[group1]="EIGHT_LEVEL", [Shift, Shift, Shift, Shift, Caps_Lock, Caps_Lock, Caps_Lock, Caps_Lock ] };
-    key <RTSH> { type[group1]="EIGHT_LEVEL", [Shift, Shift, Shift, Shift, Caps_Lock, Caps_Lock, Caps_Lock, Caps_Lock ] };
+    key <LFSH> { type[group1]="EIGHT_LEVEL", [Shift_L, Shift_L, Shift_L, Shift_L, Caps_Lock, Caps_Lock, Caps_Lock, Caps_Lock ] };
+    key <RTSH> { type[group1]="EIGHT_LEVEL", [Shift_R, Shift_R, Shift_R, Shift_R, Caps_Lock, Caps_Lock, Caps_Lock, Caps_Lock ] };
     // Level 3
     key <CAPS> { type[group1]="EIGHT_LEVEL", [ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Shift, ISO_Level3_Lock, ISO_Level3_Lock, ISO_Level3_Lock, ISO_Level3_Lock ] };
     key <BKSL> { type[group1]="EIGHT_LEVEL", [ISO_Level3_Shift, ISO_Level3_Shift, ccedilla, Ccedilla, ISO_Level3_Lock, ISO_Level3_Lock, ISO_Level3_Lock, ISO_Level3_Lock ] };
@@ -23,7 +23,7 @@ xkb_symbols "bepo_perso" {
     ////////////////////////////////////////
     modifier_map Mod5 { ISO_Level3_Shift };
     modifier_map Mod3 { ISO_Level5_Shift };
-    modifier_map shift { Shift };
+    modifier_map shift { Shift_L };
     modifier_map lock { Caps_Lock };
 
     ////////////////////////////////////////
