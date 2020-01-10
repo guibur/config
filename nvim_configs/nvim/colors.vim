@@ -9,10 +9,10 @@ hi CursorLineNr ctermbg=184 ctermfg=0
 hi MatchParen ctermbg=NONE ctermfg=1 cterm=underline
 hi NeomakeError ctermfg=NONE ctermbg=NONE cterm=underline
 hi NeomakeWarning ctermfg=NONE ctermbg=NONE cterm=underline
-hi DiffChange cterm=NONE ctermfg=NONE ctermbg=0
-hi DiffText cterm=NONE ctermfg=NONE ctermbg=54
-hi DiffDelete cterm=NONE ctermfg=NONE ctermbg=124
-hi DiffAdd cterm=NONE ctermfg=NONE ctermbg=22
+" hi DiffChange cterm=NONE ctermfg=NONE ctermbg=0
+" hi DiffText cterm=NONE ctermfg=NONE ctermbg=54
+" hi DiffDelete cterm=NONE ctermfg=NONE ctermbg=124
+" hi DiffAdd cterm=NONE ctermfg=NONE ctermbg=22
 set nohlsearch
 
 """"""""""""""""""""""""""""""""""""""""""""""""""

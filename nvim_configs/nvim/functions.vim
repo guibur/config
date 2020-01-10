@@ -33,11 +33,14 @@ function! s:formatWrap(width)
     execute "set formatprg=par\\ " . a:width . "T4p" . col
 endfunction
 
-function! s:formatCppHeaderWrap(width)
+function! s:formatCppHeaderWrap(width, is_first_symbol)
     " Go to the beginning of the line \keyword
-    execute "normal! ^W"
+    execute "normal! ^"
+    if a:is_first_symbol
+        execute "normal! W"
+    endif
     let col_0 = virtcol('.') - 1
-    "Go to the beginning of the actula text
+    "Go to the beginning of the actual text
     execute "normal! W"
     let col_1 = virtcol('.') - 1
     let row_0 = line('.')
@@ -50,7 +53,11 @@ function! s:formatCppHeaderWrap(width)
     let row = row_1
     while (row > row_0)
         " Remove the \keywords in all except first line.
-        execute "normal! ^W" . (col_1 - col_0) . "r "
+        execute "normal! ^"
+        if a:is_first_symbol
+            execute "normal! W"
+        endif
+        execute "normal! " . (col_1 - col_0) . "r "
         " Replaces the spaces at the beginning of the line by tabs.
         " execute "normal! ^hv0r\<tab>:'[,']s.\\t\\{2,4}.\\t.g\<CR>"
         execute "normal! k"
@@ -102,10 +109,12 @@ nnoremap <script> èQT :call <SID>formatWrap(120)<CR>gqq:'[,']s. \{2,4}.\t.g<CR>
 vnoremap <script> èQT <Esc>:call <SID>formatWrap(120)<CR>gvgq:'[,']s. \{2,4}.\t.g<CR>
 " Wrapping with header (first line diffent from others
 " nnoremap <script> èqh :call <SID>formatCppHeaderWrap(120)<CR>:call <SID>replaceSpacesByTabs()<CR>
-nnoremap <script> èqh :call <SID>formatCppHeaderWrap(120)<CR>
+nnoremap <script> èqh :call <SID>formatCppHeaderWrap(120, 1)<CR>
+nnoremap <script> èq( :call <SID>formatCppHeaderWrap(120, 0)<CR>
 " vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>:call <SID>replaceSpacesByTabs()<CR>
 " vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>gvgq:call <SID>replaceSpacesByTabs()<CR>
 vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>gvgq
+vnoremap <script> èq( ^E3lW<Esc>:call <SID>formatWrap(120)<CR>gvgq
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -180,3 +189,35 @@ function! SwapLR()
 endfunction
 
 vnoremap <script> gs :call SwapLR()<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" KEEP CURSOR POSITION WHEN SWITCHING BUFFERS
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Save current view settings on a per-window, per-buffer basis.
+function! AutoSaveWinView()
+    if !exists("w:SavedBufView")
+        let w:SavedBufView = {}
+    endif
+    let w:SavedBufView[bufnr("%")] = winsaveview()
+endfunction
+
+" Restore current view settings.
+function! AutoRestoreWinView()
+    let buf = bufnr("%")
+    if exists("w:SavedBufView") && has_key(w:SavedBufView, buf)
+        let v = winsaveview()
+        let atStartOfFile = v.lnum == 1 && v.col == 0
+        if atStartOfFile && !&diff
+            call winrestview(w:SavedBufView[buf])
+        endif
+        unlet w:SavedBufView[buf]
+    endif
+endfunction
+
+" When switching buffers, preserve window view.
+if v:version >= 700
+    autocmd BufLeave * call AutoSaveWinView()
+    autocmd BufEnter * call AutoRestoreWinView()
+    " autocmd BufEnter * silent! normal! g`"
+endif

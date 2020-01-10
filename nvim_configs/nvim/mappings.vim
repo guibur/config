@@ -51,7 +51,8 @@ noremap T j
 noremap S k
 noremap g0 0
 noremap g$ $
-nnoremap gp '[V']
+nnoremap àp '[V']
+nnoremap <silent> àd /\v[<=>]{7}<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Indent

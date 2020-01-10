@@ -13,7 +13,7 @@ Plug 'blueyed/vim-diminactive'
 Plug 'luochen1990/rainbow'
 Plug 'itchyny/lightline.vim'  " colorized bottom bar
 " Help syntax
-Plug 'Shougo/deoplete.nvim', { 'tag': '4.1', 'do': ':UpdateRemotePlugins' }  " tag 4.1 is necessary because 5.0 is compatible with nvim 0.3+ only, and default in ubuntu 18.04 is nvim 0.2.2
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins' }  " tag 4.1 is necessary because 5.0 is compatible with nvim 0.3+ only, and default in ubuntu 18.04 is nvim 0.2.2
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 Plug 'scrooloose/nerdcommenter'
@@ -54,6 +54,8 @@ Plug 'brettanomyces/nvim-editcommand'
 " Specific visualizers
 Plug 'lervag/vimtex'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
 
 
 " List ends here. Plugins become visible to Vim after this call.
@@ -151,6 +153,9 @@ let g:switch_custom_definitions = [
         \     '\Cleft' : 'right',
         \     '\CRIGHT': 'LEFT',
         \     '\CLEFT' : 'RIGHT',
+        \     '\Cmin'  : 'max',
+        \     '\CMin'  : 'Max',
+        \     '\CMIN'  : 'MAX',
         \   }
         \]
 nnoremap gc :call switch#Switch({'definitions': g:case_switch_custom_definitions})<cr>
@@ -189,8 +194,11 @@ let g:neomake_python_enabled_makers = ['pylint', 'flake8']
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Tag bar
 """"""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> àg :TagbarOpen fj<CR>
-nmap <silent> àk :TagbarClose<CR>
+" nmap <silent> àg :TagbarOpen fj<CR>
+" nmap <silent> àk :TagbarClose<CR>
+nmap <silent> àg :TagbarToggle<CR>
+let g:tagbar_autofocus=1
+
 let g:tagbar_map_togglesort = 'è'
 let g:tagbar_map_toggleautoclose = 'a'
 let g:tagbar_sort = 0
@@ -291,8 +299,10 @@ xmap gK  <Plug>VgSurround
 " configuration for nerdtree
 """"""""""""""""""""""""""""""""""""""""""""""""
 " active tree shortcut
-map <silent> àf :NERDTreeFocus<CR>
-map <silent> àx :NERDTreeClose<CR>
+" map <silent> àf :NERDTreeFocus<CR>
+" map <silent> àx :NERDTreeClose<CR>
+map <silent> àf :NERDTreeToggle<CR>
+
 let g:NERDTreeMapOpenInTab = 'l'
 let g:NERDTreeMapOpenInTabSilent = 'gl'
 let g:NERDTreeMapOpenSplit = 'h'
@@ -361,8 +371,12 @@ nnoremap <silent> èbb :execute "normal \<Plug>DumpDebugStringVar"<CR>
 nnoremap èbr :ResetDebugCounter<CR>
 nnoremap <silent> èbs viw"vy
 vnoremap <silent> èbs "vy
-nnoremap <silent> èbv :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('@@@myvar@@@')<CR>/@@@myvar@@@<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3ec<{1:@@@myvartoreplace@@@}><ESC>la[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/@@@myvar@@@<CR>vEc]<Space>=<ESC>/@@@myvar@@@<CR>v10lc<\|1\|><ESC>A<`0`><ESC>?@@@myvartoreplace@@@<CR>v19lc
-nnoremap <silent> èbV :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>
+nnoremap <silent> èbv :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('@@@myvar@@@')<CR>/@@@myvar@@@<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3ec<{1:@@@myvartoreplace@@@}><ESC>la[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/@@@myvar@@@<CR>vEc]<Space>=<ESC>:s.cout.cerr.e<CR>/@@@myvar@@@<CR>v10lc<\|1\|><ESC>A<`0`><ESC>?@@@myvartoreplace@@@<CR>v19lc
+nnoremap <silent> èbV :execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>:s.cout.cerr.e<CR>
+nnoremap <silent> èbt viw"vy:execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>:s.cout.cerr<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>:s.cout.cerr.e<CR>
+vnoremap <silent> èbt "vy:execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>:s.cout.cerr<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>:s.cout.cerr.e<CR>
+nnoremap <silent> èbT viw"vyk:execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>:s.cout.cerr<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>:s.cout.cerr.e<CR>
+vnoremap <silent> èbT "vyk:execute "normal \<Plug>DumpDebugStringVar"<CR>:AddDebugStringExpr('<C-R>v')<CR>:s.cout.cerr<CR>/<C-R>v<CR>hhv0k$?\d<CR>lc@@@mysep@@@<ESC>?DEBUGGING<CR>v3e"vpla[<ESC>llv/\d<CR>h"sy/@@@mysep@@@<CR>v10l"sp/<C-R>v<CR>vEc]<Space>=<ESC>:s.cout.cerr.e<CR>
 nnoremap <silent> èbe :execute "normal \<Plug>DumpDebugStringExpr"<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -430,3 +444,9 @@ let g:openbrowser_browser_commands = [
 \]
 nmap gx <plug>(openbrowser-smart-search)
 vmap gx <plug>(openbrowser-smart-search)
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Far shortcut
+""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap èr viwy:Far <C-R>"  %<Left><Left>
