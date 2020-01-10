@@ -9,6 +9,7 @@ Plug 'majutsushi/tagbar'
 Plug 'rbong/vim-vertical'  " Motion block by block (mapped to <C-t> and <C-s>)
 Plug 'tpope/vim-unimpaired'
 " Colors
+Plug 'morhetz/gruvbox'
 Plug 'blueyed/vim-diminactive'
 Plug 'luochen1990/rainbow'
 Plug 'itchyny/lightline.vim'  " colorized bottom bar
