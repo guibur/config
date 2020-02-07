@@ -1,3 +1,6 @@
+# Basic programs
+sudo apt install tree xclip curl vim byobu
+
 ln -s $HOME/Private/config/nvim_configs/nvim $HOME/.config
 
 # Install neovim and dependencies

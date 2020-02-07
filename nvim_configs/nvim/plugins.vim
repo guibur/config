@@ -1,3 +1,10 @@
+" Install vim-plug if not installed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.config/nvim/plugins')
 
