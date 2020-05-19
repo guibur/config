@@ -1,13 +1,18 @@
 # Basic programs
-sudo apt install tree xclip curl vim byobu
+sudo apt install tree xclip curl vim byobu python3-pip zsh python meld fzy silversearcher-ag
 
 ln -s $HOME/Private/config/nvim_configs/nvim $HOME/.config
+
+# Change default shell
+chsh -s $(which zsh)
 
 # Install neovim and dependencies
 mkdir -p $HOME/.soft_manually_installed
 cd $HOME/.soft_manually_installed
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 chmod u+x nvim.appimage
+mkdir -p $HOME/.local
+mkdir -p $HOME/.local/bin
 ln -s $HOME/.soft_manually_installed/nvim.appimage $HOME/.local/bin/nvim
 pip3 install -U pynvim neovim-remote --user
 pip2 install -U pynvim --user

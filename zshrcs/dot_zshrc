@@ -53,7 +53,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git git-prompt)
 bindkey '^\n' autosuggest-execute
 bindkey '^\t' forward-word
 
@@ -90,6 +90,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 export TERM=screen-256color
+export PATH=$HOME/.local/bin:$PATH
 
 # disable the freezing by <C-s>
 stty -ixon
@@ -156,15 +157,8 @@ alias min='make install -j4'
 
 alias cm.='cmake .'
 
-alias àwc='cd ~/dev/wandercode'
-alias àsr='cd ~/dev/src'
-alias àc='cd ~/dev/build/wandercode'
-alias àth='cd ~/dev/wandercode/thot'
-alias àwb='cd ~/dev/wandercode/wanderbrain'
-alias àlg='cd ~/server_logs/Logs'
-
-alias àsm='cd ~/dev/SIMUbuild/wandercode && switchToSimu'
-alias àsl='cd ~/dev/wandercode/wanderbrain/simulation && switchToSimu'
+alias àwc='cd ~/wdc_workspace/src/wandercode'
+alias àsr='cd ~/wdc_workspace/src'
 
 alias update_tags="ctags -R ."
 alias wdc_tags="cd ~/dev/wandercode && ctags -R . && cd -"
@@ -179,7 +173,6 @@ if ! { [ -n "$TMUX" ]; } then
     byobu
 else
     if ! { [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; } then
-        # cd ~/dev/wandercode
-        nvim -c te
+        nvim -c te -c te -c te -c te -c te -c te -c te -c te -c te -c b1
     fi
 fi
