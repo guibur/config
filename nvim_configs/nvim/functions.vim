@@ -33,7 +33,7 @@ function! s:formatWrap(width)
     execute "set formatprg=par\\ " . a:width . "T4p" . col
 endfunction
 
-function! s:formatCppHeaderWrap(width, is_first_symbol)
+function! s:formatCppHeaderWrap(width, is_first_symbol, n_header_word)
     " Go to the beginning of the line \keyword
     execute "normal! ^"
     if a:is_first_symbol
@@ -41,7 +41,7 @@ function! s:formatCppHeaderWrap(width, is_first_symbol)
     endif
     let col_0 = virtcol('.') - 1
     "Go to the beginning of the actual text
-    execute "normal! W"
+    execute "normal! " . a:n_header_word . "W"
     let col_1 = virtcol('.') - 1
     let row_0 = line('.')
     " Set formatting with heading width
@@ -109,8 +109,9 @@ nnoremap <script> èQT :call <SID>formatWrap(120)<CR>gqq:'[,']s. \{2,4}.\t.g<CR>
 vnoremap <script> èQT <Esc>:call <SID>formatWrap(120)<CR>gvgq:'[,']s. \{2,4}.\t.g<CR>
 " Wrapping with header (first line diffent from others
 " nnoremap <script> èqh :call <SID>formatCppHeaderWrap(120)<CR>:call <SID>replaceSpacesByTabs()<CR>
-nnoremap <script> èqh :call <SID>formatCppHeaderWrap(120, 1)<CR>
-nnoremap <script> èq( :call <SID>formatCppHeaderWrap(120, 0)<CR>
+nnoremap <script> èqh :call <SID>formatCppHeaderWrap(120, 1, 1)<CR>
+nnoremap <script> èq( :call <SID>formatCppHeaderWrap(120, 0, 1)<CR>
+nnoremap <script> èq) :call <SID>formatCppHeaderWrap(120, 0, 2)<CR>
 " vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>:call <SID>replaceSpacesByTabs()<CR>
 " vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>gvgq:call <SID>replaceSpacesByTabs()<CR>
 vnoremap <script> èqh ^E3lW<Esc>:call <SID>formatWrap(120)<CR>gvgq
