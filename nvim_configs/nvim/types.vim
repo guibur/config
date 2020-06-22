@@ -32,6 +32,6 @@ fun! s:termSpecificChangingChanges()
     if &buftype ==# 'terminal' || &buftype ==# 'nofile'
         hi clear OverLength
     else
-        highlight OverLength ctermbg=blue ctermfg=white guibg=#592929
+        highlight OverLength ctermbg=68 ctermfg=white guibg=#592929
     endif
 endfun

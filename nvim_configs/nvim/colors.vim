@@ -2,8 +2,10 @@
 " General colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""
 let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_number_column="bg1"
 
 colorscheme gruvbox
+hi Normal ctermbg=NONE ctermfg=white
 
 set t_Co=256
 " hi ColorColumn ctermbg=0
@@ -26,21 +28,33 @@ set nohlsearch
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
 " highlight unwanted spaces
-highlight UnwantedSpaces ctermbg=red ctermfg=white
-call matchadd('UnwantedSpaces', ' \| ', 51)
-highlight TrailingSpaces ctermbg=green
-call matchadd('TrailingSpaces', '\s\+$', 52)
+highlight UnwantedSpaces ctermbg=214 ctermfg=white
+" call matchadd('UnwantedSpaces', ' \| ', 51)
+highlight TrailingSpaces ctermbg=142
+" call matchadd('TrailingSpaces', '\s\+$', 52)
 
 " highlight the errors in the terminal
 " highlight MakeErrors ctermbg=124 ctermfg=white
 highlight MakeErrors cterm=bold ctermfg=124
-call matchadd('MakeErrors', '.*\[E\].*', 55)
+" call matchadd('MakeErrors', '.*\[E\].*', 55)
 highlight MakeWarnings cterm=bold ctermfg=202
-call matchadd('MakeWarnings', '.*\[W\].*', 54)
+" call matchadd('MakeWarnings', '.*\[W\].*', 54)
 
 " highlight line too long (120 char)
-highlight OverLength ctermbg=blue ctermfg=white guibg=#592929
-call matchadd('OverLength', '\%121v.\+', 53)
+highlight OverLength ctermbg=68 ctermfg=white guibg=#592929
+" call matchadd('OverLength', '\%121v.\+', 53)
+
+function! s:color_things()
+    call matchadd('UnwantedSpaces', ' \| ', 51)
+    call matchadd('TrailingSpaces', '\s\+$', 52)
+    call matchadd('MakeErrors', '.*\[E\].*', 55)
+    call matchadd('MakeWarnings', '.*\[W\].*', 54)
+    call matchadd('OverLength', '\%121v.\+', 53)
+endfunction
+
+call s:color_things()
+command! ColorThings call s:color_things()
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -49,7 +63,7 @@ call matchadd('OverLength', '\%121v.\+', 53)
 
 let g:rainbow_conf = {
 \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'firebrick'],
-\	'ctermfgs': ['brown', 'lightblue', 207, 'lightgreen', 98],
+\	'ctermfgs': ['brown', 109, 207, 'lightgreen', 98],
 \	'operators': '_,_',
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 \	'separately': {
