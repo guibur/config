@@ -164,6 +164,9 @@ let g:switch_custom_definitions = [
         \     '\Cmin'  : 'max',
         \     '\CMin'  : 'Max',
         \     '\CMIN'  : 'MAX',
+        \     '\CUpper': 'Lower',
+        \     '\Cupper': 'lower',
+        \     '\CUPPER': 'LOWER',
         \   }
         \]
 nnoremap gc :call switch#Switch({'definitions': g:case_switch_custom_definitions})<cr>
@@ -196,7 +199,7 @@ let g:neomake_py_pylint_maker = {
 let g:neomake_py_flake_maker = {
     \ 'args': ['%:p', '--max-line-length=120']
     \ }
-let g:neomake_python_enabled_makers = ['pylint', 'flake8']
+let g:neomake_python_enabled_makers = ['pylint', 'mypy']
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -208,6 +211,7 @@ nmap <silent> àg :TagbarToggle<CR>
 let g:tagbar_autofocus=1
 
 let g:tagbar_map_togglesort = 'è'
+let g:tagbar_map_togglepause = 'f'
 let g:tagbar_map_toggleautoclose = 'a'
 let g:tagbar_sort = 0
 
@@ -224,6 +228,8 @@ nmap <silent> à[ :!cd ~/wdc_workspace/src/wandercode2 && ctags -R --exclude='**
 let g:bufExplorerSortBy='number'
 nnoremap àà :BufExplorer<CR>
 tnoremap àà <C-\><C-n>:BufExplorer<CR>
+nmap à. :BufExplorer<CR>b
+tmap à. <Esc>:BufExplorer<CR>b
 set hidden
 set confirm
 
