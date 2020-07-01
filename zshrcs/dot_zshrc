@@ -119,25 +119,15 @@ nv () {
 	if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
 		nvr "$@"
 	else
-        # rm -f /tmp/vim-server
-        # nvim --cmd "let g:server_addr = serverstart('/tmp/vim-server')" "$@"
         nvim "$@"
 	fi
 }
-# alias nv-send="python3 $HOME/.config/nvim/send_command_to_vim_session.py"
 alias nv-send="nvr --remote-send"
 
-# cd() {  
-  # builtin cd "$@";
-  # # if the parent process is nvim, do a vim cd 
-  # # (ps -o comm= $PPID | grep nvim > /dev/null) && nv-send :lc "$@"
-  # if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
-      # nvr --remote-send "<Esc>:lcd $@<CR>A"
-  # fi
-# }
 vd(){
   (ps -o comm= $PPID | grep nvim > /dev/null) && nv-send :cd "$PWD"
 }
+
 alias ,q='exit'
 export VISUAL=nvr
 export EDITOR=$VISUAL
@@ -165,8 +155,9 @@ alias wdc_tags="cd ~/dev/wandercode && ctags -R . && cd -"
 
 alias disk_usage="du -sch .[\!.]* * | sort -h"
 
-
-# source $HOME/.zshrc.wdc
+if [[ -a $HOME/.zshrc.wdc ]]; then
+    source $HOME/.zshrc.wdc
+fi
 
 
 if ! { [ -n "$TMUX" ]; } then

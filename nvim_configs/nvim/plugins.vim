@@ -27,7 +27,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
 Plug 'Vimjas/vim-python-pep8-indent'  " Necessary for python indentation
-Plug 'psf/black'
+Plug 'psf/black', {'branch': 'stable'}
 Plug 'Yggdroot/indentLine'  " displays indentation levels with spaces (with ¦)
 Plug 'godlygeek/tabular'
 Plug 'sbdchd/neoformat'
