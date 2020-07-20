@@ -159,6 +159,13 @@ if [[ -a $HOME/.zshrc.wdc ]]; then
     source $HOME/.zshrc.wdc
 fi
 
+if [ -d $HOME/.xkb/keymap ]; then
+    if [ -z $KBD_DEF ]; then
+        setxkbmap -layout fr,ps -variant ,bepo_perso -print | xkbcomp -I"$HOME"/.xkb - $DISPLAY > /dev/null 2>&1
+        echo "Set layout perso"
+        export KBD_DEF=1
+    fi
+fi
 
 if ! { [ -n "$TMUX" ]; } then
     byobu
