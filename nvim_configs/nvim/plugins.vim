@@ -442,7 +442,7 @@ let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 let g:mkdp_auto_close = 0
 
 let g:black_linelength = 120
-let g:black_targetversion = 'py27'
+" let g:black_targetversion = 'py27'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " OpenBrowser
