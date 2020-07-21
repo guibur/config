@@ -1,2 +1,3 @@
 nvim_configs/nvim/plugins
 nvim_configs/nvim/autoload/plug.vim
+dot_files/dot_byobu/.ssh-agent
